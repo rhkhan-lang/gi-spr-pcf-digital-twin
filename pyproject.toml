@@ -1,0 +1,8 @@
+[project]
+name = "gi-spr-pcf-digital-twin"
+version = "1.0.0"
+description = "Digital Twin of Au/TiO2/Graphene Four-Groove SPR-PCF Biosensor"
+requires-python = ">=3.10"
+
+[tool.vercel]
+entrypoint = "backend.app:app"
