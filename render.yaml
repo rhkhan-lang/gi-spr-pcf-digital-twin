@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: gi-spr-pcf-digital-twin
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -b 0.0.0.0:$PORT backend.app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

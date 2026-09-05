@@ -1,0 +1,1 @@
+geometry_id,Gt_nm,TiO2_nm,graphene_layers,Rgr_um,ah1_um,ah2_um,cw_um,ch_um,tissue_pair,n_normal,n_pathological,lambda_normal_nm,lambda_pathological_nm,WS_nm_per_RIU,AS_abs_per_RIU,FWHM_normal_nm,FWHM_pathological_nm,FOM,D_separability,mesh_level,solver_status,split_group

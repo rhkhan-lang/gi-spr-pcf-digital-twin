@@ -1,0 +1,1065 @@
+% Elsevier/Sensing and Bio-Sensing Research style article.
+% Polished manuscript version with an updated AI/ML literature review and
+% a clearly delimited ML-assisted inverse-design framework.
+
+\documentclass[5p,times,twocolumn]{elsarticle}
+
+%% The ecrc package is called to preserve the Elsevier CRC-style commands used
+%% in the source template. A local compatibility ecrc.sty is included in the
+%% package for systems where the legacy file is unavailable.
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage{subfigure} % omitted because it conflicts with subcaption in current TeX distributions
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage[figuresright]{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{lineno}
+\usepackage{xcolor}
+\usepackage{grffile}
+\usepackage{dblfloatfix}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\pdfstringdefDisableCommands{%
+  \def\mathrm#1{#1}%
+  \def\textsubscript#1{#1}%
+  \def\sep{; }%
+}
+\captionsetup{font=small,skip=3pt}
+
+\graphicspath{{./}}
+\sisetup{detect-all=true,per-mode=symbol}
+
+\journal{Sensing and Bio-Sensing Research}
+
+%% Compact float settings to remove large white gaps while preserving figure chronology
+\raggedbottom
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{6pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.85}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\dblfloatpagefraction}{0.85}
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{5}
+\setcounter{totalnumber}{8}
+\setcounter{dbltopnumber}{4}
+\emergencystretch=2em
+\sloppy
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{8pt plus 1fil}
+\setlength{\@fpbot}{0pt plus 1fil}
+\setlength{\@dblfptop}{0pt}
+\setlength{\@dblfpsep}{8pt plus 1fil}
+\setlength{\@dblfpbot}{0pt plus 1fil}
+\makeatother
+
+
+%%%%%-------------Line numbering
+% \linenumbers  % enable for peer-review line numbering if required
+\let\oldequation\equation
+\let\oldendequation\endequation
+\renewenvironment{equation}
+  {\linenomathNonumbers\oldequation}
+  {\oldendequation\endlinenomath}
+
+\newcommand{\TiO}{TiO$_2$}
+\newcommand{\neff}{n_{\mathrm{eff}}}
+\newcommand{\lres}{\lambda_{\mathrm{res}}}
+\newcommand{\RIU}{\mathrm{RIU}}
+\newcommand{\etal}{\textit{et al.}}
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Au/TiO$_2$/Graphene Four-Groove SPR Photonic Crystal Fiber Biosensor for Gastrointestinal Tissue Refractometry: FEM Baseline and a Physics-Grounded ML Inverse-Design Framework}
+
+\author[]{ {
+Naimur Rahman$^{1}$,
+Muhammad~Rezaul~Hoque~Khan$^{2,*}$,
+Md~Sanowar~Hosen$^{3}$,
+Atiqul~Alam~Chowdhury$^{4}$,
+Nafiz~Imtiaz~Bin~Hamid$^{1}$
+}
+}
+
+\address{\bf {1.~Department of Electrical \& Electronic Engineering, Islamic University of Technology, Gazipur-1704, Bangladesh.\\
+2.~Department of Electrical \& Electronic Engineering, Atish Dipankar University of Science \& Technology, Dhaka, Bangladesh.\\
+3.~Department of Electrical \& Electronics Engineering, Daffodil International University, Daffodil Smart City, Dhaka, Bangladesh.\\
+4.~Department of Electrical \& Electronic Engineering, Southeast University, Dhaka, Bangladesh.}}
+
+\cortext[]{Muhammad~Rezaul~Hoque~Khan (Corresponding author) (email: rezakhan@adust.edu.bd).}
+
+\begin{abstract}
+Refractive-index (RI) contrast between normal and pathological biological states provides a physical basis for label-free optical interrogation, but the coupled design space of plasmonic photonic crystal fiber (PCF) sensors makes conventional one-factor-at-a-time tuning inefficient and potentially suboptimal. This study presents a four-groove Au/TiO$_2$/graphene-coated surface-plasmon-resonance photonic crystal fiber (SPR-PCF) and establishes a finite-element-method (FEM) baseline together with a physics-grounded machine-learning (ML) inverse-design formulation. The structure combines two air-hole scales, a rectangular central guiding feature, four outward-facing analyte-access grooves, and a multilayer plasmonic interface. Full-vector FEM simulations are used to evaluate core--surface-plasmon-polariton coupling, confinement loss, wavelength sensitivity, amplitude sensitivity, and RI calibration for seven literature-derived gastrointestinal normal/pathological RI comparisons spanning esophageal, pancreatic, colonic, metastatic liver, and hepatocellular carcinoma states. Within the co-registered tissue confinement-loss dataset, the highest wavelength sensitivity is 8695.65~nm/RIU for the esophageal comparison. An archived amplitude-sensitivity sweep gives a largest magnitude of approximately 953.79~RIU$^{-1}$ for pancreatic adenocarcinoma, but because that sweep was exported on a different spectral grid it is treated as an auxiliary metric pending unified re-simulation. The fitted resonance calibration is $\lambda_{\mathrm{res}}=3455.32n_a-3035.55$ with $R^2=0.9956$. To move beyond sequential sweeps, the paper formulates an eight-variable simulator-in-the-loop strategy that combines space-filling FEM sampling, uncertainty-aware surrogate modeling, active learning, Pareto optimization, and full-FEM revalidation. A fabrication-aware objective is additionally defined to penalize sensitivity to coating and geometry perturbations. The present paper reports the FEM baseline only; ML-derived performance gains are intentionally not claimed without a completed multidimensional training database and independent FEM verification. A web-based physics-guided digital-twin interface is additionally incorporated to visualize the exact sensor geometry, core/SPP mode localization, three-dimensional structure, RI-pair spectral response, inverse-design variables and fabrication-tolerance behavior. The resulting framework provides a rigorous route for converting the present sensor into a reproducible, fabrication-aware inverse-design study.
+\end{abstract}
+
+\begin{keyword}
+Surface plasmon resonance \sep Photonic crystal fiber \sep Gastrointestinal tissue refractometry \sep Machine learning \sep Inverse design \sep Active learning \sep Bayesian optimization \sep Fabrication robustness \sep Digital twin
+\end{keyword}
+
+\end{frontmatter}
+
+
+\section{Introduction}
+\label{section_1}
+
+Gastrointestinal (GI) malignancies remain a major contributor to the global cancer burden, with colorectal, liver, stomach, pancreatic and esophageal cancers collectively accounting for a substantial fraction of cancer incidence and mortality~\cite{Sung2026Global,Bray2024Global}. Contemporary diagnosis relies on combinations of endoscopy, cross-sectional imaging, histopathology and molecular or biochemical biomarkers. These modalities are indispensable, but their implementation can involve invasive tissue acquisition, centralized instrumentation, operator-dependent interpretation, or delayed laboratory processing. Accordingly, label-free photonic sensing is being explored as a complementary physical-measurement route rather than as a replacement for established clinical diagnostics. Optical biosensors can convert changes in RI, absorption, morphology, binding or concentration into measurable changes in phase, intensity, loss or resonance wavelength~\cite{Zhang2021EIS,DeLuna2018PC,DeLuna2019RI,Singh2025Review}. For biological samples, such optical contrasts may arise from changes in hydration, cellular density, intracellular composition and extracellular structure; therefore, RI-sensitive sensing can provide a useful experimental phenotype provided that its limitations and sample-to-sample variability are explicitly recognized.
+
+Photonic crystal fibers (PCFs) are attractive platforms for this purpose because their modal confinement, dispersion and evanescent-field overlap can be engineered through the dimensions, positions and symmetries of microstructured air holes and defects~\cite{Knight2003,Russell2003,Russell2006,Pissadakis2015,Akowuah2012JQE}. Coupling the guided PCF mode to a surface-plasmon-polariton (SPP) mode adds a second degree of control. Near the phase-matching condition, power transfers from the guided mode to the lossy plasmonic mode, producing a confinement-loss maximum or transmission minimum whose spectral position shifts with the analyte RI~\cite{Ritchie1957,Otto1968,Kretschmann1968,Homola2008,Chen2012SPR,Piliarik2009Limits}. Recent cancer- and biomolecule-oriented SPR-PCF work includes D-shaped, open-channel, square, dual-core, H-shaped, V-shaped and graphene-assisted structures~\cite{Yasli2021Cancer,Chaudhary2022TNB,Ehyaee2023EPJ,Mittal2023Photonics,Ibrahimi2023Plasmonics,Sardar2024JSEN,Abdelghaffar2024JOSAB,Pappu2024Plasmonics,Arafin2024OME,Khan2025Prostate}. Related studies by the present research group have investigated PCF/SPR-PCF platforms for chemical, blood-constituent and cancer-associated refractometry~\cite{Khan2021Covid,Khan2023Cancer,Khan2023Petrochemical,Islam2022AZO,Islam2022Cyanide,Islam2023DualArrow,Khan2024GoldNanowire,Khan2025Prostate}.
+
+The present sensor uses a hybrid Au/TiO$_2$/graphene interface. Gold provides a chemically stable plasmonic response~\cite{Johnson1972,Palik1998Optical}; a thin TiO$_2$ overlayer can modify the local dielectric environment and coupling condition; and graphene offers a high-area outer interface compatible with adsorption and surface functionalization~\cite{Lin2020TiO2,Dash2014Graphene,Szunerits2013Graphene,Tan2015GraphenePCF}. Four outward-facing coated grooves are employed so that the analyte can contact the sensing interface directly instead of being infiltrated into small internal holes. This geometry is intended to balance analyte accessibility with the modal control provided by the microstructured silica region.
+
+\subsection{AI/ML and inverse design in contemporary photonic sensing}
+\label{subsec:ml_literature}
+
+The principal methodological limitation of conventional PCF-SPR development is not the absence of parameter sensitivity information, but the sparse exploration of a strongly coupled multidimensional design space. One-factor-at-a-time (OFAT) sweeps are valuable for physical interpretation, yet the selected optimum can depend on the order in which parameters are tuned and interactions among coating thickness, groove curvature, hole size and core dimensions can remain hidden. Inverse design instead treats the desired optical response as an objective and searches the joint parameter space with optimization, surrogate modeling, active learning or reinforcement learning~\cite{Molesky2018Inverse,Geddis2026AIPlasmonics}.
+
+Recent PCF-SPR literature has moved rapidly toward this paradigm. Akter \etal~generated 1868 COMSOL samples and compared regression algorithms for predicting effective index and confinement loss, showing that data-driven surrogates can reproduce expensive FEM responses with high accuracy~\cite{Akter2025MLPCF}. Khatun and Islam coupled ML regression with SHAP-based explainability to identify influential variables in a high-sensitivity PCF-SPR biosensor~\cite{Khatun2025XAI}; their 2026 work further combined ML, XAI and uncertainty quantification for Ag--TiO$_2$ PCF-SPR design~\cite{Khatun2026MLXAI}. Li \etal~combined an MLP surrogate with NSGA-II and TOPSIS to formulate PCF-SPR design as a multi-objective optimization problem rather than a sequence of independent sweeps~\cite{Li2025MLMultiObjective}. More broadly, active-learning inverse design has been shown to reduce required training data in large nanophotonic design spaces~\cite{Singh2025ActiveLearning}; small-sample Bayesian/surrogate strategies have achieved large reductions in full-wave calls~\cite{Xie2026SmallSample}; gradient-informed Bayesian optimization has been demonstrated for efficient nanophotonic inverse design~\cite{Mahlau2026BONNI}; and a DQN coupled directly to full-wave FDTD simulations recently demonstrated closed-loop reinforcement-learning optimization of a plasmonic RI sensor in \textit{Optics Express}~\cite{Hossain2026DeepRL}. Fabrication robustness is also increasingly incorporated directly into inverse-design objectives rather than assessed only after optimization~\cite{Wang2025RobustID}. These developments establish that a rigorous inverse-design study should report not only a proposed workflow, but also surrogate accuracy, sample efficiency, independent solver verification, and robustness to fabrication perturbations.
+
+\begin{table*}[!t]
+\centering
+\caption{Representative AI/ML and inverse-design studies that define the current methodological benchmark for the present SPR-PCF framework.}
+\label{tab:recent_ml_literature}
+\scriptsize
+\renewcommand{\arraystretch}{1.10}
+\begin{tabularx}{\textwidth}{p{0.145\textwidth} p{0.21\textwidth} p{0.22\textwidth} X}
+\toprule
+\textbf{Study} & \textbf{Platform} & \textbf{Strategy} & \textbf{Relevance to this work} \\
+\midrule
+Akter \etal~\cite{Akter2025MLPCF} & PCF-SPR & FEM dataset + multiple regressors & Demonstrates high-fidelity surrogate prediction from COMSOL-generated PCF-SPR data. \\
+Khatun and Islam~\cite{Khatun2025XAI} & PCF-SPR & ML + SHAP/XAI & Adds feature attribution to optical-response prediction. \\
+Li \etal~\cite{Li2025MLMultiObjective} & PCF-SPR & MLP + NSGA-II + TOPSIS & Demonstrates multi-objective sensitivity/FOM optimization using a learned surrogate. \\
+Singh \etal~\cite{Singh2025ActiveLearning} & Nanophotonics & Active learning + inverse design & Shows sample-efficient selection of informative simulations. \\
+Xie \etal~\cite{Xie2026SmallSample} & Micro/nano optics & Bayesian-optimized Extra Trees + DE & Demonstrates small-sample closed-loop inverse design and reduction of FEM calls. \\
+Mahlau \etal~\cite{Mahlau2026BONNI} & Nanophotonics & Gradient-informed Bayesian optimization & Provides a current benchmark for efficient global/local hybrid inverse design. \\
+Hossain \etal~\cite{Hossain2026DeepRL} & Plasmonic RI sensor & DQN + full-wave FDTD & Demonstrates simulator-in-the-loop autonomous plasmonic-sensor optimization. \\
+Wang \etal~\cite{Wang2025RobustID} & Digital photonics & Robust adjoint inverse design & Incorporates fabrication variations directly into design optimization. \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+Against this background, the contribution supported by the present dataset is deliberately separated into two layers. First, a deterministic FEM baseline establishes the optical behavior of a four-groove Au/TiO$_2$/graphene SPR-PCF and evaluates seven literature-derived GI normal/pathological RI comparisons. Second, a physics-grounded inverse-design formulation specifies how the eight coupled physical variables are to be sampled, learned, optimized and revalidated without treating numerical-boundary variables such as PML thickness as manufacturable design degrees of freedom. The present paper does not claim ML-derived gains that have not yet been computed; instead, it defines the data, validation metrics, robust objective and solver-in-the-loop acceptance criteria required for a defensible ML extension.
+
+The main contributions are therefore: (i) an analyte-accessible four-groove Au/TiO$_2$/graphene-coated SPR-PCF architecture; (ii) FEM-based modal, confinement-loss and sensitivity analysis of the deterministic baseline; (iii) separation of physical design variables from numerical-domain convergence variables; (iv) multi-tissue GI refractometric evaluation using a common structural platform; (v) a reproducible active-learning, multi-objective and fabrication-aware inverse-design protocol benchmarked against current ML/photonic-design literature; and (vi) development of a browser-based physics-guided digital-twin interface for geometry visualization, modal-field interpretation, RI-pair interrogation, inverse-design exploration and fabrication-tolerance assessment.
+
+\section{Structural design}
+\label{sec:structural_design}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.98\linewidth]{Fig1_Model_Workflow_Column.pdf}
+\caption{The steps taken to create and analyze the model in this study.}
+\label{fig:model_workflow}
+\end{figure}
+
+The design and analysis workflow is presented in Fig.~\ref{fig:model_workflow}. First, the global variables and structural variables were declared. The proposed SPR-PCF geometry was then generated, materials were assigned, boundary conditions were applied, and the computational domain was meshed. The complex effective index of the core mode and SPP mode was obtained using the modal solver. The extracted optical parameters were then analyzed to determine confinement loss, sensitivity, resolution, phase matching and linearity. If the expected response was not obtained, the geometrical and material variables were fine-tuned until the optimum structure was reached.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.93\linewidth]{sensor image.png}
+\caption{Cross-sectional configuration of the proposed Au/TiO$_2$/graphene-coated SPR-PCF biosensor. The figure defines the silica region, analyte region, PML, air holes, gold layer, TiO$_2$ layer, graphene layer and principal geometrical parameters of the proposed sensor.}
+\label{Fig:HC-PCF}
+\end{figure*}
+
+The complete cross-section of the proposed SPR-PCF is shown in Fig.~\ref{Fig:HC-PCF}. The sensor consists of a silica microstructured region, circular air holes of two sizes, a rectangular core feature, four outward-facing sensing grooves, a surrounding analyte region and an outer perfectly matched layer (PML). The enlarged interface view shows that the sensing grooves are coated sequentially with Au, TiO$_2$ and graphene. This arrangement provides direct interaction between the analyte and the plasmonic interface without forcing the biological sample into small internal holes.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.98\linewidth]{Fig3_Meshing_Output.pdf}
+\caption{Meshing output with boundary condition for a quarter segment of the PML layer computation window for the recommended PCF structure.}
+\label{fig:mesh_output}
+\end{figure}
+
+The mesh and boundary-condition concept is illustrated in Fig.~\ref{fig:mesh_output}. The mesh is refined near the central microstructured region and coated sensing grooves because these regions govern the coupling between the guided core mode and the SPP mode. The PML is applied at the outer boundary to absorb outgoing fields and suppress numerical reflection.
+
+
+
+\section{Numerical analysis}
+\label{sec:numerical}
+
+The proposed biosensor was designed and numerically investigated by using the finite element method (FEM), which has been widely used for PCF and SPR-PCF eigenmode analysis~\cite{Akowuah2012JQE,Ayyanar2018JSEN,Ahmed2019JSEN,Islam2023DualArrow,Khan2025Prostate}. In the simulation workflow, the global variables and structural variables were first defined, after which the PCF geometry, air holes, grooves, analyte domain, gold layer, TiO$_2$ layer, graphene layer and perfectly matched layer (PML) were constructed. The material properties were then assigned to each domain, and the structure was meshed using triangular finite elements. The modal solver was used to calculate the complex effective refractive index of the guided core mode and the SPP mode. The calculated data were further analyzed to obtain confinement loss, resonance wavelength, amplitude sensitivity, wavelength sensitivity, resolution, figure of merit and linear fitting response.
+
+For numerically resolving the electromagnetic field distribution in the fiber cross-section, the following vector wave equation was solved:
+\begin{equation}
+\nabla \times \left( \mu_r^{-1}\nabla \times \mathbf{E} \right)-k_0^2\epsilon_r\mathbf{E}=0,
+\label{eq:fem_wave}
+\end{equation}
+where $\mathbf{E}$ is the electric field vector, $\mu_r$ is the relative permeability, $\epsilon_r$ is the relative permittivity, $k_0=2\pi/\lambda$ is the free-space wave number and $\lambda$ is the operating wavelength. The PML boundary condition was applied at the outside boundary of the computational window to absorb outward radiation and suppress artificial reflection.
+
+The confinement loss (CL) of the core mode was determined from the imaginary part of the complex effective refractive index and is expressed as
+\begin{equation}
+\alpha_{\mathrm{CL}}\left(\mathrm{dB/cm}\right)=8.686\times k_0\times \mathrm{Im}\left[\neff\right]\times10^{4},
+\label{eq:confinement_loss}
+\end{equation}
+where $\mathrm{Im}[\neff]$ is the imaginary part of the effective refractive index. In an SPR sensor, the maximum value of $\alpha_{\mathrm{CL}}$ indicates the strongest coupling between the core-guided mode and the SPP mode.
+
+The wavelength sensitivity was calculated from the shift in resonance wavelength with respect to the variation of analyte RI:
+\begin{equation}
+S_{\lambda}=\frac{\Delta\lambda_{\mathrm{res}}}{\Delta n_a}=\frac{\lambda_{\mathrm{res},2}-\lambda_{\mathrm{res},1}}{n_{a,2}-n_{a,1}}\quad \left(\mathrm{nm/RIU}\right),
+\label{eq:wavelength_sensitivity}
+\end{equation}
+where $\lambda_{\mathrm{res},1}$ and $\lambda_{\mathrm{res},2}$ are the resonance wavelengths for the normal and pathological analyte refractive indices, respectively.
+
+The amplitude sensitivity was evaluated using the normalized change in confinement loss:
+\begin{equation}
+S_A(\lambda)=-\frac{1}{\alpha_{\mathrm{CL}}(\lambda,n_a)}\frac{\partial \alpha_{\mathrm{CL}}(\lambda,n_a)}{\partial n_a}\quad\left(\mathrm{RIU}^{-1}\right).
+\label{eq:amplitude_sensitivity}
+\end{equation}
+This parameter is useful when the resonance wavelength shift alone is not sufficient to separate two closely positioned analyte classes.
+
+The sensing resolution was estimated as
+\begin{equation}
+R=\frac{\Delta n_a\Delta\lambda_{\min}}{\Delta\lambda_{\mathrm{res}}},
+\label{eq:resolution}
+\end{equation}
+where $\Delta\lambda_{\min}$ is the spectral resolution of the optical spectrum analyzer. The figure of merit (FOM) was defined as
+\begin{equation}
+\mathrm{FOM}=\frac{S_{\lambda}}{\mathrm{FWHM}},
+\label{eq:fom}
+\end{equation}
+where FWHM represents the full width at half maximum of the resonance peak. The phase-matching condition can be expressed as
+\begin{equation}
+\mathrm{Re}\left(n_{\mathrm{eff,core}}\right)\approx \mathrm{Re}\left(n_{\mathrm{eff,SPP}}\right),
+\label{eq:phase_match}
+\end{equation}
+and the resonance is expected to occur near this modal interaction region.
+
+\section{Detailed design of the proposed SPR-PCF}
+\label{sec:Design}
+
+
+The full cross-section of the proposed SPR-PCF is shown in Fig.~\ref{Fig:HC-PCF}. The proposed design consists of a silica background, a microstructured central region, circular air holes, a small rectangular core feature, four outward-facing grooves and an outer PML. The grooves are positioned symmetrically at approximately $0^{\circ}$, $90^{\circ}$, $180^{\circ}$ and $270^{\circ}$ around the microstructured region. The enlarged inset in Fig.~\ref{Fig:HC-PCF} shows that the plasmonic interface is composed of Au, TiO$_2$ and graphene. The analyte directly contacts the graphene-coated outer surface of the multilayer interface. Such a groove-based structure is advantageous because the analyte does not need to fill small internal holes; instead, it interacts directly with accessible plasmonic channels.
+
+
+\begin{figure*}[!t]
+\centering
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{design pic.png}
+\caption{Full cross-section}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{design pic2.png}
+\caption{Region selection}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{design pic3.png}
+\caption{Central microstructure}
+\end{subfigure}
+\caption{Additional simulated geometry views of the proposed PCF structure. These figures show the global cross-section, selected computational region and enlarged microstructured core/groove region used to construct the final sensor model.}
+\label{Fig:design_views}
+\end{figure*}
+The additional geometry views in Fig.~\ref{Fig:design_views} show the transition from the global computational domain to the detailed central PCF region containing the circular air holes, auxiliary holes, rectangular core feature and four sensing-groove positions.
+
+\begin{figure*}[!t]
+\centering
+\begin{subfigure}[b]{0.42\linewidth}
+\centering
+\includegraphics[width=\linewidth]{3D image.png}
+\caption{Opaque 3D view}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.54\linewidth}
+\centering
+\includegraphics[width=\linewidth]{3D transparent view.png}
+\caption{Transparent 3D view}
+\end{subfigure}
+\caption{Three-dimensional representation of the proposed SPR-PCF biosensor. The transparent view illustrates the longitudinal continuity of the microstructured PCF region and the analyte-surrounded sensing section.}
+\label{Fig:3D_design}
+\end{figure*}
+Figure~\ref{Fig:3D_design} illustrates the three-dimensional structure of the sensor. The opaque view is useful for visualizing the outer sensor body, whereas the transparent view shows the longitudinal extension of the central PCF and plasmonic sensing structure inside the analyte domain. The simulated model therefore represents a finite sensing section in which the analyte surrounds the exposed grooves and perturbs the SPP mode.
+
+\begin{figure*}[!t]
+\centering
+\begin{subfigure}[b]{0.35\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Core X mode.png}
+\caption{Core $x$ mode}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Core Y mode.png}
+\caption{Core $y$ mode}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\linewidth}
+\centering
+\includegraphics[width=\linewidth]{SPP X mode.png}
+\caption{SPP $x$ mode}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\linewidth}
+\centering
+\includegraphics[width=\linewidth]{SPP Y mode.png}
+\caption{SPP $y$ mode}
+\end{subfigure}
+\caption{Electric-field distributions for core and SPP modes. The core modes are mainly confined near the central guiding region, while the SPP modes are concentrated near the plasmonic groove interfaces.}
+\label{Fig:electricfield}
+\end{figure*}
+The modal distributions are shown in Fig.~\ref{Fig:electricfield}. The core modes remain primarily in the central guiding region, which confirms the guided nature of the selected mode. In contrast, the SPP modes show localized hotspots at the coated grooves. The $x$- and $y$-oriented SPP maps excite different opposite groove pairs due to the four-fold structural symmetry and polarization dependence. This confirms that the exposed Au/TiO$_2$/graphene grooves are the active sensing regions.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=200pt]{Phase_Matching_OneColumn.pdf}
+\caption{Archived phase-matching sweep for $n_a=1.3969$, showing the core-mode loss and the real effective indices of the core and SPP modes. This sweep is retained only as a qualitative illustration of core--SPP coupling because it was exported over a different spectral window from the gastrointestinal tissue confinement-loss dataset.}
+\label{Fig:phase_matching}
+\end{figure}
+The modal interaction is illustrated qualitatively in Fig.~\ref{Fig:phase_matching}: the real parts of the core- and SPP-mode effective indices approach one another in the coupling region while the guided-mode loss rises. Because the archived phase-matching sweep and the gastrointestinal tissue confinement-loss sweeps were exported over different spectral windows, this panel is used only as qualitative evidence of core--SPP coupling and is not used to derive the quantitative tissue sensitivities reported later. For quantitative validation, phase matching, RI-dependent confinement loss and amplitude sensitivity must be regenerated on one common spectral grid while tracking the same resonance branch throughout.
+
+
+\section{Results and discussion}
+\label{sec:results}
+
+The performance of the proposed SPR-PCF biosensor was analyzed by observing the confinement-loss spectrum and the amplitude-sensitivity response for different structural variables. In the following subsections, the same chronology as a conventional PCF sensor paper is followed: first the major geometrical and material variables are optimized, and then the final sensor is applied to pathological tissue analyte detection.
+
+\subsection{Deterministic FEM baseline and parameter sensitivity}
+\label{subsec:fem_baseline}
+
+A deterministic parameter study was first used to establish physically interpretable trends and a baseline geometry before formulating the multidimensional inverse-design problem. The explored ranges and selected values are summarized in Table~\ref{table:optimized_parameters}. The complete 2$\times$2 optimization panels for Au thickness, groove radius, graphene layer number, TiO$_2$ thickness, the two air-hole radii, core dimensions, PML thickness and analyte-domain radius are retained in the Supplementary Information (Figs.~S1--S9) so that the main paper emphasizes the inverse-design logic rather than repeating nine large sweep figures.
+
+The baseline trends are consistent with the expected SPR physics. Increasing the metal or dielectric-overlayer thickness changes the penetration depth and local impedance of the plasmonic interface; varying groove radius alters the analyte-exposed curvature and modal overlap; the two air-hole radii and central-core dimensions shift the core-mode effective index and therefore the phase-matching condition. The intermediate coating values $G_t=19$~nm and $t_{\mathrm{TiO_2}}=12$~nm, one graphene layer, and $R_{gr}=0.39~\mu$m were retained for the reported tissue simulations. The selected larger and smaller air-hole radii are 0.40 and 0.15~$\mu$m, respectively, and the selected core dimensions are $(c_w,c_h)=(0.26,0.40)$~$\mu$m.
+
+Importantly, the PML-thickness and outer analyte-radius sweeps are interpreted as numerical-domain checks rather than physical optimization. Their weak influence over the investigated ranges supports the selected $t_{\mathrm{PML}}=1.5~\mu$m and $R_a=10~\mu$m settings, but these quantities are excluded from the ML design vector. The OFAT results are therefore not interpreted as proof of a global optimum; they provide the deterministic reference against which the multidimensional optimizer is to be judged.
+
+\begin{table*}[!t]
+\caption{Deterministic FEM baseline: investigated physical design ranges, selected geometry, and treatment in the inverse-design problem.}
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.24\textwidth} p{0.14\textwidth} p{0.20\textwidth} p{0.18\textwidth} X}
+\toprule
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Investigated range} & \textbf{Selected value} & \textbf{Inverse-design role} \\
+\midrule
+Gold thickness & $G_t$ & 18--20~nm & 19~nm & Physical variable \\
+TiO$_2$ thickness & $t_{\mathrm{TiO_2}}$ & 11--13~nm & 12~nm & Physical variable \\
+Graphene layer number & $L$ & 0--2 & 1 & Discrete physical variable \\
+Groove radius & $R_{gr}$ & 0.37--0.41~$\mu$m & 0.39~$\mu$m & Physical variable \\
+Smaller air-hole radius & $a_{h2}$ & 0.10--0.20~$\mu$m & 0.15~$\mu$m & Physical variable \\
+Larger air-hole radius & $a_{h1}$ & 0.35--0.45~$\mu$m & 0.40~$\mu$m & Physical variable \\
+Core width/height & $c_w,c_h$ & $(0.13,0.20)$--$(0.26,0.40)$~$\mu$m & $(0.26,0.40)$~$\mu$m & Physical variables \\
+Analyte-domain radius & $R_a$ & 9.5--10.5~$\mu$m & 10~$\mu$m & Numerical-domain check only \\
+PML thickness & $t_{\mathrm{PML}}$ & 1--2~$\mu$m & 1.5~$\mu$m & Numerical-domain check only \\
+\bottomrule
+\end{tabularx}
+\label{table:optimized_parameters}
+\end{table*}
+
+\subsection{Physics-grounded ML inverse design and robustness protocol}
+\label{subsec:ml_inverse_optimization}
+
+The eight-dimensional physical design vector is
+\begin{equation}
+\mathbf{x}=\left[G_t,t_{\mathrm{TiO_2}},L,R_{gr},a_{h1},a_{h2},c_w,c_h\right].
+\label{eq:ml_design_vector}
+\end{equation}
+For each candidate geometry, the FEM solver returns the complex modal indices and RI-dependent confinement-loss spectra from which $\lambda_{\mathrm{res}}$, $WS$, $AS$, FWHM and FOM are extracted. The inverse-design surrogate therefore approximates an expensive map $\mathbf{x}\mapsto\mathbf{y}$, where $\mathbf{y}$ contains the relevant spectral metrics for all tissue RI pairs.
+
+\paragraph{Multidimensional data generation and validation.}
+The existing OFAT points are suitable as seed observations but not as a complete training set because they sparsely sample parameter interactions. The closed-loop implementation should augment them with a space-filling Sobol or Latin-hypercube design over the physical ranges in Table~\ref{table:optimized_parameters}. Each complete geometry constitutes one independent ML sample; wavelength points from a single spectrum must not be randomly split across training and test sets. Candidate surrogates should include Gaussian-process regression (GPR), random forest/Extra Trees, gradient boosting and a compact multilayer perceptron. Model selection should report a geometry-level train/validation/test partition, five-fold cross-validation, $R^2$, mean absolute error (MAE), root-mean-square error (RMSE), and parity plots for the primary optical targets~\cite{Akter2025MLPCF,Khatun2025XAI,Khatun2026MLXAI}. GPR or an ensemble surrogate is particularly useful in early iterations because predictive uncertainty can guide acquisition.
+
+\paragraph{Application-specific multi-objective function.}
+Maximizing only the largest pairwise wavelength sensitivity can produce a geometry that performs poorly for another pathology. For tissue pair $j$, a linewidth-normalized spectral separability can be defined as
+\begin{equation}
+D_j(\mathbf{x})=\frac{|\lambda_{P,j}-\lambda_{N,j}|}{\tfrac{1}{2}\left(FWHM_{P,j}+FWHM_{N,j}\right)},
+\label{eq:separability}
+\end{equation}
+with a worst-case objective
+\begin{equation}
+D_{\min}(\mathbf{x})=\min_j D_j(\mathbf{x}).
+\label{eq:worstcase}
+\end{equation}
+A Pareto formulation can then maximize $D_{\min}$, mean $|AS|$, and mean FOM while enforcing fabrication and meshing constraints. This formulation is more appropriate for a multi-tissue sensor than maximizing a single best-case sensitivity, because it rewards balanced separability across all seven GI comparisons.
+
+\paragraph{Active-learning closed loop.}
+The workflow in Fig.~\ref{Fig:ml_inverse_workflow} follows four acceptance stages: (1) fit and cross-validate the surrogate on multidimensional FEM data; (2) use an uncertainty-aware acquisition function or Pareto optimizer to propose candidates; (3) evaluate each proposed geometry with the full FEM model; and (4) append only solver-verified results before retraining. Active learning is preferred to a large static database because related nanophotonic studies have shown substantial reductions in required training data or full-wave calls~\cite{Singh2025ActiveLearning,Xie2026SmallSample,Mahlau2026BONNI}. The conventional OFAT geometry in Table~\ref{table:optimized_parameters} is retained as the explicit baseline. A successful ML result must therefore report both surrogate prediction and independent FEM value for the same candidate, together with the relative verification error.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.92\textwidth]{ML_inverse_design_workflow.png}
+\caption{Physics-grounded simulator-in-the-loop inverse-design workflow. Space-filling geometries are evaluated by full-vector FEM, used to train an uncertainty-aware surrogate, ranked by a multi-objective acquisition/optimization strategy, and re-simulated before acceptance. The deterministic OFAT geometry remains the baseline for all claimed improvements.}
+\label{Fig:ml_inverse_workflow}
+\end{figure*}
+
+\paragraph{Fabrication-aware robustness.}
+A robust optimum should remain useful when the fabricated geometry deviates from its nominal dimensions. Let $\boldsymbol{\delta}$ denote a vector of fabrication perturbations. A robust objective can be written as
+\begin{equation}
+J_{\mathrm{rob}}(\mathbf{x})=\mathbb{E}_{\boldsymbol{\delta}}\left[D_{\min}(\mathbf{x}+\boldsymbol{\delta})\right]-\beta\,\mathrm{SD}_{\boldsymbol{\delta}}\left[D_{\min}(\mathbf{x}+\boldsymbol{\delta})\right],
+\label{eq:robust_obj}
+\end{equation}
+where $\beta$ controls the penalty on fabrication sensitivity. For the present geometry, the minimum recommended tolerance protocol is $G_t\pm1$~nm, $t_{\mathrm{TiO_2}}\pm1$~nm, and $\pm2\%$ perturbations of $R_{gr}$, $a_{h1}$, $a_{h2}$, $c_w$ and $c_h$, followed by Monte-Carlo evaluation of the final ML candidate. Robust inverse-design studies in contemporary photonics demonstrate the importance of incorporating such perturbations into the optimization rather than evaluating nominal performance alone~\cite{Wang2025RobustID}.
+
+\paragraph{Evidence boundary.}
+The current source archive does not contain the multidimensional FEM database, trained-surrogate outputs, solver-verified ML candidates, unified phase-matching/tissue spectra, or Monte-Carlo tolerance statistics required to report completed ML inverse optimization. Those quantities are therefore not fabricated in this manuscript. All numerical performance values in Section~\ref{subsec:tissue_detection} correspond to the deterministic FEM baseline. The accompanying reproducibility package provides a data schema and executable ML-analysis scaffold so that these missing results can be inserted without changing the scientific definitions used here.
+
+
+
+\section{Digital-twin interface and deployment architecture}
+\label{sec:digital_twin}
+
+To translate the proposed SPR-PCF biosensor from a static numerical design into an interactive design-analysis environment, a web-based physics-guided digital-twin interface was developed. The digital twin reproduces the physical configuration of the four-groove Au/TiO$_2$/graphene-coated SPR-PCF biosensor and provides an interactive link among sensor geometry, modal-field behavior, RI-dependent spectral response, inverse-design search variables and fabrication-tolerance assessment. In the present manuscript, the digital twin is treated as an implementation and visualization layer for the FEM and ML workflow; it is not used as a substitute for full FEM verification.
+
+The interface contains four principal modules. The first module visualizes the exact sensor geometry, including the circular PML boundary, analyte region, silica PCF body, central rectangular guiding region, two air-hole scales, four outward-facing sensing grooves, and the Au/TiO$_2$/graphene multilayer coating at the groove interfaces. The second module displays electric-field distributions for the core and SPP modes. The core-mode field is mainly confined near the central guiding region, whereas the SPP-mode field is concentrated near the plasmonic groove interfaces, where the Au/TiO$_2$/graphene coating interacts directly with the surrounding analyte. This mode-viewer module supports physical interpretation of the SPR coupling mechanism and clarifies why the exposed grooves act as the active sensing interfaces.
+
+The third module provides RI-pair spectral interrogation. For a selected normal/pathological tissue pair, the interface estimates the resonance-wavelength shift, wavelength sensitivity, linewidth, figure of merit, and linewidth-normalized spectral separability. The separability index used in the digital twin follows
+\begin{equation}
+D =
+\frac{|\lambda_{P}-\lambda_{N}|}
+{\left(FWHM_{P}+FWHM_{N}\right)/2},
+\label{eq:dt_separability}
+\end{equation}
+where $\lambda_{N}$ and $\lambda_{P}$ denote the resonance wavelengths for normal and pathological analytes, respectively. A larger $D$ indicates stronger spectral discrimination relative to the resonance linewidth.
+
+The fourth module implements the inverse-design and robustness interface. The physical design vector is
+\begin{equation}
+\mathbf{x}_{\mathrm{DT}}=
+\left[
+G_t,\,
+t_{\mathrm{TiO_2}},\,
+L,\,
+R_{gr},\,
+a_{h1},\,
+a_{h2},\,
+c_w,\,
+c_h
+\right],
+\label{eq:dt_design_vector}
+\end{equation}
+where $G_t$ is the Au thickness, $t_{\mathrm{TiO_2}}$ is the TiO$_2$ thickness, $L$ is the graphene layer number, $R_{gr}$ is the groove radius, $a_{h1}$ and $a_{h2}$ are the larger and smaller air-hole radii, and $c_w$ and $c_h$ are the central-core dimensions. These are the same physical variables used in the inverse-design protocol of Section~\ref{subsec:ml_inverse_optimization}. Numerical-domain quantities such as PML thickness are displayed for transparency but are not treated as manufacturable inverse-design variables.
+
+
+Figure~\ref{Fig:dt_interface} shows the complete digital-twin dashboard prepared for online deployment. The interface includes the exact sensor-geometry viewer, field-distribution and three-dimensional-view selector, RI-pair interrogation panel, inverse-design search controls, fabrication-robustness module and manuscript reference-performance table in a single browser-accessible environment. This full-interface view is preferred in the main manuscript because it demonstrates the practical implementation layer rather than only isolated visual modules.
+
+\begin{figure*}[p]
+\centering
+\includegraphics[height=0.88\textheight,keepaspectratio]{Digital_Twin_Interface_Overview.png}
+\caption{Web-based digital-twin interface for the proposed Au/TiO$_2$/graphene-coated SPR-PCF biosensor. The dashboard integrates the exact sensor-geometry twin, core/SPP electric-field-viewer module, three-dimensional sensor-view module, normal/pathological RI-pair interrogation, ML-assisted inverse-design search controls, fabrication-robustness module and manuscript reference-performance table. The interface is presented as a physics-guided digital-twin demonstrator; quantitative prediction accuracy should be reported only after replacement of the demonstration surrogate with a FEM-trained and independently validated surrogate model.}
+\label{Fig:dt_interface}
+\end{figure*}
+
+
+The browser implementation also includes a corrected surrogate-model architecture, shown in Fig.~\ref{Fig:dt_surrogate_architecture}. Unlike the earlier four-input demonstrator, the present architecture is aligned with the proposed Au/TiO$_2$/graphene-coated four-groove SPR-PCF design space. The digital-twin surrogate is formulated as a compact multilayer perceptron (MLP) that maps the physical design state and analyte refractive index to the principal resonance-response quantities. The input vector is
+\begin{equation}
+\mathbf{z}_{\mathrm{DT}}=
+\left[
+G_t,\,
+t_{\mathrm{TiO_2}},\,
+L,\,
+R_{gr},\,
+a_{h1},\,
+a_{h2},\,
+c_w,\,
+c_h,\,
+n_a
+\right],
+\label{eq:dt_surrogate_input}
+\end{equation}
+where the first eight entries describe the manufacturable SPR-PCF geometry and coating stack, while $n_a$ denotes the analyte refractive index. The network follows a $9\rightarrow64\rightarrow64\rightarrow32\rightarrow6$ topology. The first two hidden layers provide capacity to learn coupled effects among the plasmonic coating thicknesses, groove radius, air-hole dimensions, central-core geometry and analyte loading, whereas the final hidden layer compresses the learned representation before the output stage. The output vector is
+\begin{equation}
+\mathbf{y}_{\mathrm{DT}}=
+\left[
+\lambda_{\mathrm{res}},\,
+CL_{\max},\,
+FWHM,\,
+WS,\,
+FOM,\,
+D
+\right],
+\label{eq:dt_surrogate_output}
+\end{equation}
+where $\lambda_{\mathrm{res}}$ is the resonance wavelength, $CL_{\max}$ is the peak confinement loss, $FWHM$ is the spectral linewidth, $WS$ is the wavelength sensitivity, $FOM$ is the figure of merit and $D$ is the linewidth-normalized separability defined in Eq.~\ref{eq:dt_separability}. This interface-level neural model is useful for rapid visualization, online screening and demonstrating how the future FEM--ML loop will be deployed. However, it is treated here as a digital-twin demonstrator rather than a validated predictive model. Publication-grade prediction accuracy requires geometry-level FEM/COMSOL training samples, independent train/validation/test splits, uncertainty calibration, and full-FEM revalidation of selected inverse-design candidates.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.95\textwidth]{Surrogate_Architecture_DT_Corrected.png}
+\caption{Corrected surrogate architecture for the proposed SPR-PCF digital twin. The input layer contains the eight physical sensor-design variables, $[G_t,t_{\mathrm{TiO_2}},L,R_{gr},a_{h1},a_{h2},c_w,c_h]$, and the analyte refractive index $n_a$. The hidden layers approximate the nonlinear geometry--response relationship, while the output layer estimates resonance wavelength, peak confinement loss, FWHM, wavelength sensitivity, FOM and linewidth-normalized separability. The architecture is suitable for the web-based digital-twin interface, but validated prediction accuracy requires retraining on FEM-generated data and independent FEM revalidation of selected candidates.}
+\label{Fig:dt_surrogate_architecture}
+\end{figure*}
+
+\begin{table*}[!t]
+\centering
+\caption{Functional modules of the proposed SPR-PCF digital-twin interface.}
+\label{tab:dt_modules}
+\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{p{0.20\textwidth} p{0.35\textwidth} X}
+\toprule
+\textbf{Module} & \textbf{Function} & \textbf{Scientific role} \\
+\midrule
+Geometry viewer & Displays the four-groove Au/TiO$_2$/graphene SPR-PCF structure, air-hole arrangement, central guiding region, analyte domain and PML boundary. & Ensures that the digital representation corresponds to the simulated sensor geometry and exposes all design variables. \\
+Mode-field viewer & Displays core-mode and SPP-mode electric-field distributions. & Explains central core confinement and plasmonic localization at the coated groove interfaces. \\
+RI-pair interrogation & Estimates resonance shift, wavelength sensitivity, FWHM, FOM and linewidth-normalized separability for selected RI pairs. & Connects tissue-RI variation to measurable spectral features. \\
+Inverse-design interface & Allows inspection of the eight-variable physical design vector and candidate optimization targets. & Provides the front-end for FEM-trained ML inverse optimization and candidate selection. \\
+Tolerance module & Evaluates the influence of coating-thickness and geometric perturbations. & Supports fabrication-aware assessment of the final sensor design. \\
+Deployment layer & Provides a browser-based interface suitable for online access. & Enables interactive visualization, reproducibility and public demonstration of the sensor concept. \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+The recommended operational architecture is a closed loop in which the browser interface sends a candidate geometry to a validated surrogate model, receives both predicted performance and uncertainty, and forwards high-value candidates for full FEM revalidation. Verified FEM outputs are then appended to the design database for retraining. In this architecture, the digital twin acts as the human-facing layer of the inverse-design workflow rather than as an independent source of truth:
+\begin{equation}
+\begin{aligned}
+\mathrm{DT~interface}
+&\rightarrow \mathrm{FEM\text{-}trained~surrogate}\\
+&\rightarrow \mathrm{uncertainty~estimate}\\
+&\rightarrow \mathrm{candidate~geometry}\\
+&\rightarrow \mathrm{FEM~revalidation}\\
+&\rightarrow \mathrm{database~update}.
+\end{aligned}
+\label{eq:dt_closed_loop}
+\end{equation}
+
+This distinction is important for reproducibility. The current digital twin can visualize the design, demonstrate the analysis workflow and support online dissemination, but quantitative claims of ML-discovered performance improvement require a multidimensional FEM database, surrogate validation on unseen geometries, out-of-distribution detection and solver-verified candidate acceptance. Once those elements are implemented, the same interface can become an operational digital twin for active-learning-driven optimization and fabrication-aware decision support.
+
+
+\subsection{Digital-twin surrogate validation and inverse-design diagnostics}
+\label{subsec:dt_surrogate_diagnostics}
+
+Demonstrator diagnostic plots for the digital-twin surrogate and inverse-design modules are summarized in Figs.~\ref{Fig:dt_training_test}--\ref{Fig:dt_active_learning}. These figures show the reporting format for training convergence, held-out prediction accuracy, inverse-design convergence and query efficiency during an active-learning workflow. In the present version, these plots are treated as demonstrator-level outputs of the digital-twin workflow. Therefore, they should not be interpreted as final FEM-validated predictive evidence unless the plotted points are regenerated from a documented FEM/COMSOL database with fixed train/validation/test splits and independently verified candidate simulations.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.96\textwidth]{DT_Surrogate_Training_and_Test.png}
+\caption{Demonstrator-format digital-twin surrogate training and held-out resonance-wavelength prediction performance. (a) Training and validation MSE loss curves for the compact MLP surrogate, with early stopping indicated by the vertical dashed line. (b) Held-out predicted-versus-true resonance wavelength for unseen design/analyte combinations. This figure illustrates the expected validation output of the DT workflow; publication-grade values must be regenerated from a documented FEM-trained dataset.}
+\label{Fig:dt_training_test}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{DT_Surrogate_All_Output_Parity.png}
+\caption{Demonstrator-format parity plots for the principal digital-twin surrogate outputs. The plotted outputs include resonance wavelength, FWHM, minimum transmission and wavelength sensitivity. Each panel compares predicted and true values on a held-out test set, with the dashed diagonal indicating ideal prediction. These plots are included to define the intended validation format for the FEM-trained digital-twin surrogate.}
+\label{Fig:dt_all_output_parity}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{DT_Inverse_Design_Convergence.png}
+\caption{Demonstrator-format inverse-design convergence behaviour of the proposed digital-twin workflow. The left panel shows convergence of the predicted resonance wavelength toward the target wavelength. The middle panel shows sensitivity optimization subject to the wavelength target, and the right panel shows the decay of the overall inverse-design loss over optimization steps. Candidate designs selected by this module should be accepted only after full FEM revalidation.}
+\label{Fig:dt_inverse_convergence}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.78\textwidth]{DT_Active_Learning_Query_Efficiency.png}
+\caption{Demonstrator-format query-efficiency comparison between uncertainty-guided active learning and random sampling for the digital-twin surrogate. The active-learning strategy reaches higher held-out mean $R^2$ at the same simulator-query budget, illustrating how FEM calls may be prioritized during surrogate refinement. This figure defines the intended active-learning evaluation format and should be regenerated using real FEM-query histories before final publication.}
+\label{Fig:dt_active_learning}
+\end{figure*}
+
+\subsection{Detection of normal and pathological tissue analytes}
+\label{subsec:tissue_detection}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.9\linewidth]{Combined_Confinement_Loss_7_Panels.pdf}
+\caption{Combined confinement-loss spectra for normal and pathological tissue analytes: (a) normal esophageal cell and esophageal tumor cell, (b) normal pancreatic cell and pancreatic adenocarcinoma cell, (c) normal pancreatic cell and IPMN, (d) normal cecal tissue and tubulovillous adenoma, (e) normal sigmoid-colon tissue and adenocarcinoma, (f) normal liver tissue and metastatic liver tissue, and (g) normal liver tissue and hepatocellular carcinoma tissue.}
+\label{Fig:combined_cancer}
+\end{figure*}
+
+
+The confinement-loss response of the optimized sensor for seven pathological tissue cases is presented in Fig.~\ref{Fig:combined_cancer}. In each panel, the dotted curve represents the normal tissue or cell response and the solid curve represents the pathological case. The resonance shift is caused by the RI variation between normal and pathological analytes. For esophageal tumor, pancreatic adenocarcinoma, IPMN and colon pathological cases, the resonance is red-shifted with respect to the corresponding normal response. For MET and HCC liver cases, the resonance shifts toward a shorter wavelength, indicating a blue-shift behavior. This opposite liver response is useful because it demonstrates that the proposed sensor can detect both increasing and decreasing RI trends.
+
+\begin{figure*}[!t]
+\centering
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Confinement_Loss_Esophagus.pdf}
+\caption{Esophagus}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Confinement_Loss_Pancreas_adenocarcinoma.pdf}
+\caption{Pancreatic adenocarcinoma}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Confinement_Loss_Pancreas_IPMN.pdf}
+\caption{IPMN}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Confinement_Loss_Colon_Type_1.pdf}
+\caption{Colon type-1}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Confinement_Loss_Colon_Type_2.pdf}
+\caption{Colon type-2}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Confinement_Loss_Liver__MET_.pdf}
+\caption{MET}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\linewidth}
+\centering
+\includegraphics[width=\linewidth]{Confinement_Loss_Liver__HCC_.pdf}
+\caption{HCC}
+\end{subfigure}
+\caption{Individual confinement-loss spectra for all investigated pathological tissue cases. The individual panels are also presented to make the resonance shifts and linewidths of each tissue pair easier to inspect alongside the combined comparison.}
+\label{Fig:individual_cancer}
+\end{figure*}
+The individual confinement-loss plots are provided in Fig.~\ref{Fig:individual_cancer}. These plots support closer visual inspection of each diagnostic case. The largest visible resonance separations occur for the pancreatic cases, while the colon and liver cases require more careful calibration because their wavelength shifts are smaller. The esophageal case also shows a clear resonance shift, indicating the possibility of discriminating normal esophageal and tumor-cell analytes.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{Amplitude_Sensitivity_All_Cancers.pdf}
+\caption{Archived combined amplitude-sensitivity spectra for the investigated pathological analytes. These curves are retained as auxiliary data and are not treated as co-registered quantitative validation of the tissue confinement-loss resonances until a common spectral grid is regenerated.}
+\label{Fig:amplitude_all}
+\end{figure}
+Figure~\ref{Fig:amplitude_all} shows the amplitude-sensitivity spectra for all pathological analytes. The pancreatic adenocarcinoma curve provides the largest negative amplitude-sensitivity response, followed by IPMN. The esophageal and colon cases show smaller negative features, while the liver tissue cases exhibit positive features over the plotted interval. Therefore, the amplitude response can be used together with the resonance wavelength to construct a two-feature decision space for tissue classification.
+
+\begin{table*}[!t]
+\caption{Sensitivity metrics available in the source archive. Wavelength sensitivity is derived from the tissue confinement-loss dataset; the amplitude-sensitivity column is an auxiliary archived metric obtained on a different spectral grid and therefore requires unified re-simulation before direct cross-comparison.}
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.25\textwidth} p{0.16\textwidth} >{\centering\arraybackslash}p{0.25\textwidth} >{\centering\arraybackslash}p{0.22\textwidth}}
+\toprule
+\textbf{Pathological analyte} & \textbf{Tissue group} & \textbf{Wavelength sensitivity (nm/RIU)} & \textbf{Auxiliary AS (RIU$^{-1}$)} \\
+\midrule
+Esophageal tumor & Esophagus & 8695.65 & -375.93 \\
+Pancreatic adenocarcinoma & Pancreas & 4583.33 & -953.79 \\
+IPMN & Pancreas & 4090.91 & -680.56 \\
+Tubulovillous adenoma & Cecum & 2105.26 & -240.74 \\
+Colon adenocarcinoma & Sigmoid colon & 2000.00 & -175.34 \\
+Metastatic liver tissue (MET) & Liver & 2162.16 & 235.73 \\
+Hepatocellular carcinoma (HCC) & Liver & 2013.42 & 221.12 \\
+\bottomrule
+\end{tabularx}
+\label{table:parameters}
+\end{table*}
+Table~\ref{table:parameters} summarizes the wavelength sensitivities extracted from the normal/pathological tissue confinement-loss responses together with the auxiliary amplitude-sensitivity values available in the source archive. The maximum wavelength sensitivity is 8695.65~nm/RIU for the esophageal comparison. The archived amplitude-sensitivity sweep reaches a magnitude of approximately 953.79~RIU$^{-1}$ for pancreatic adenocarcinoma; however, these amplitude values are not used as co-registered validation metrics because their spectral grid differs from that of the tissue confinement-loss dataset. The simulations, however, represent refractometric separation under the assigned RI values; they do not establish clinical diagnostic sensitivity or specificity. Real tissue measurements may additionally depend on wavelength-dependent absorption, hydration, temperature, sample preparation, inter-patient variability and biochemical specificity. Consequently, the present results should be interpreted as an optical-sensor proof of concept that requires calibration with biological phantoms and, ultimately, measured tissue-derived samples.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{Linear fitting characteristics of the proposed SPR-PCF biosensor.pdf}
+\caption{Linear fitting characteristics of the proposed SPR-PCF biosensor. The resonance wavelength varies approximately linearly with analyte refractive index according to $y=3455.32x-3035.55$ and $R^2=0.9956$.}
+\label{Fig:linear_fit}
+\end{figure}
+The linear calibration response is shown in Fig.~\ref{Fig:linear_fit}. The fitting equation is
+\begin{equation}
+\lambda_{\mathrm{res}}=3455.32n_a-3035.55,
+\label{eq:linear_fit}
+\end{equation}
+where $n_a$ is the analyte refractive index. The coefficient of determination is $R^2=0.9956$. This high linearity is important for practical sensing because it allows a direct conversion from measured resonance wavelength to analyte RI using a simple calibration equation.
+
+
+
+
+\subsection{Comparison with previously reported sensors}
+\label{subsec:comparison}
+
+\begin{table*}[!t]
+\centering
+\caption{Comparison of the proposed Au/TiO$_2$/graphene four-groove SPR-PCF biosensor with previously reported cancer-cell, tissue, and related PCF sensing studies. For this work, WS values are from the tissue confinement-loss dataset, whereas the tabulated AS values are auxiliary archived metrics pending unified spectral regeneration.}
+\label{tab:comparison_previous_combined}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\textwidth}{@{}p{0.12\textwidth} p{0.28\textwidth} p{0.23\textwidth} p{0.13\textwidth} p{0.11\textwidth}@{}}
+\toprule
+\textbf{Reference} & \textbf{Sensor type / structure} & \textbf{Target analyte / application} & \textbf{WS (nm/RIU)} & \textbf{AS (RIU$^{-1}$)} \\
+\midrule
+Yasli~\cite{Yasli2021Cancer} 
+& SPR-PCF biosensor 
+& Multiple cancer cells 
+& 3150--7142.86 
+& -305 to -757 \\
+
+Mittal \textit{et al.}~\cite{Mittal2023Photonics} 
+& Spiral-shaped SPR-PCF 
+& Cancer-cell detection 
+& -- 
+& -83 to -289 \\
+
+Ehyaee \textit{et al.}~\cite{Ehyaee2023EPJ} 
+& Dual-core PCF sensor 
+& Cancer-cell RI detection 
+& 10000--12857.14 
+& -- \\
+
+Chaudhary \textit{et al.}~\cite{Chaudhary2022TNB} 
+& Au--TiO$_2$ coated SPR-PCF 
+& Cancerous cells 
+& 5500--10714.28 
+& -1387 to -1599 \\
+
+Sardar and Faisal~\cite{Sardar2024JSEN} 
+& Dual-core dual-polished PCF-SPR sensor 
+& Cancer-cell detection 
+& 3500--7143 
+& -152 to -270 \\
+
+Abdelghaffar \textit{et al.}~\cite{Abdelghaffar2024JOSAB} 
+& Dual V-shaped SPR-PCF 
+& Cancer-cell detection 
+& 8208--23700 
+& -- \\
+
+Pappu \textit{et al.}~\cite{Pappu2024Plasmonics} 
+& H-shaped exposed-core SPR sensor 
+& Cancer-cell detection 
+& 4000--7857.14 
+& -422.76 to -985.27 \\
+
+Khan \textit{et al.}~\cite{Khan2024GoldNanowire} 
+& Gold-nanowire square-clad SPR-PCF 
+& Various cancer cells 
+& Reported high WS 
+& -- \\
+
+Hosen \textit{et al.}~\cite{Khan2025Prostate} 
+& Square-shaped SPR-PCF 
+& Prostate cancer cells 
+& 2222.22--5000 
+& 132.72--159.06 \\
+
+Khan \textit{et al.}~\cite{Khan2023Cancer} 
+& Wave-shaped microstructure PCF 
+& Cancer-cell RI detection 
+& Reported high RS 
+& -- \\
+
+Islam \textit{et al.}~\cite{Islam2023DualArrow} 
+& Dual-arrow SPR-PCF 
+& Broad RI / biosensing 
+& Reported high WS 
+& -- \\
+
+Islam \textit{et al.}~\cite{Islam2022AZO} 
+& AZO-coated plasmonic PCF nanosensor 
+& Blood constituents 
+& NIR/visible response 
+& -- \\
+
+\midrule
+\textbf{This work} 
+& Four-groove Au/TiO$_2$/graphene SPR-PCF 
+& Esophageal tumor 
+& 8695.65 
+& -375.93 \\
+
+\textbf{This work} 
+& Four-groove Au/TiO$_2$/graphene SPR-PCF 
+& Pancreatic adenocarcinoma 
+& 4583.33 
+& -953.79 \\
+
+\textbf{This work} 
+& Four-groove Au/TiO$_2$/graphene SPR-PCF 
+& Intraductal papillary mucinous neoplasm (IPMN) 
+& 4090.91 
+& -680.56 \\
+
+\textbf{This work} 
+& Four-groove Au/TiO$_2$/graphene SPR-PCF 
+& Colon type-1 tubulovillous adenoma 
+& 2105.26 
+& -240.74 \\
+
+\textbf{This work} 
+& Four-groove Au/TiO$_2$/graphene SPR-PCF 
+& Colon type-2 adenocarcinoma 
+& 2000.00 
+& -175.34 \\
+
+\textbf{This work} 
+& Four-groove Au/TiO$_2$/graphene SPR-PCF 
+& Metastatic liver tissue (MET) 
+& 2162.16 
+& 235.73 \\
+
+\textbf{This work} 
+& Four-groove Au/TiO$_2$/graphene SPR-PCF 
+& Hepatocellular carcinoma tissue (HCC) 
+& 2013.42 
+& 221.12 \\
+
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+
+Table~\ref{tab:comparison_previous_combined} compares the proposed design with selected previous PCF and SPR-PCF biosensors reported in recent literature~\cite{Yasli2021Cancer,Mittal2023Photonics,Ehyaee2023EPJ,Chaudhary2022TNB,Sardar2024JSEN,Abdelghaffar2024JOSAB,Ibrahimi2023Plasmonics,Yang2023Plasmonics,Pappu2024Plasmonics,Arafin2024OME,Ashrafian2025SciRep,Khodatars2025SciRep,Jamil2025SBSR,Alam2025SBSR}. The principal utility of the proposed sensor is the use of one accessible four-groove platform across several gastrointestinal normal/pathological RI comparisons, rather than a claim of universal superiority over sensors operated over different RI ranges and spectral bands. The four-groove configuration provides direct access to the plasmonic interface, while the Au/TiO$_2$/graphene stack offers additional control of the local dielectric environment and outer sensing surface.
+
+
+
+
+\section{Numerical validation, limitations and reproducibility requirements}
+\label{sec:limitations}
+
+Six issues delimit the claims that can be supported by the present source archive. First, the archived phase-matching/amplitude-sensitivity sweeps and the tissue confinement-loss sweeps were exported over different spectral windows; the phase-matching plot is therefore qualitative and a common spectral re-simulation is required before claiming one-to-one correspondence between modal crossing and every reported tissue resonance. Second, the available manuscript does not contain a multidimensional FEM design matrix, so the ML section specifies an executable inverse-design protocol but does not report trained-model accuracy or an ML-derived optimum. Third, the current source does not include a full mesh-refinement table with resonance shift versus degrees of freedom; the PML and analyte-domain sweeps demonstrate boundary-domain stability but should not be presented as a substitute for a formal mesh-convergence analysis. Fourth, adjacent OFAT points around the nominal geometry provide useful sensitivity trends but are not statistically equivalent to an independent fabrication-tolerance study. Fifth, the final reproducibility package should tabulate the exact normal/pathological RI values used for every tissue pair together with their literature source, wavelength and measurement conditions; derived sensitivities alone do not fully document the biological-optical input data. Sixth, the solver archive should preserve the exact dispersive material definitions and interpolation functions used for silica, Au, TiO$_2$ and graphene, together with FEM software/version, mesh settings and eigenmode tolerances. These details are essential when resonances extend across visible/NIR/SWIR spectral regions where material dispersion and absorption can change appreciably.
+
+A completed closed-loop inverse-design validation therefore requires: (i) a unified wavelength grid for core/SPP indices, RI-dependent confinement loss and amplitude sensitivity; (ii) a geometry-level multidimensional training/test database with cross-validated surrogate error metrics; (iii) full-FEM verification of the top ML candidates against the OFAT baseline; (iv) mesh-convergence data showing stability of $\lambda_{\mathrm{res}}$, peak loss and derived sensitivity; (v) a fabrication-variance study using coating-thickness and geometry perturbations around the final inverse-designed solution; and (vi) a complete material/tissue-optical-constant provenance table. These additions would convert the present evidence-aligned framework into a completed ML inverse-design study rather than a methodological extension.
+
+\section{Fabrication considerations for the proposed SPR-PCF}
+\label{sec:fabrication}
+
+Another significant issue is the manufacturability of the PCF-based device. Various techniques such as capillary stacking, extrusion, sol--gel processing, multiple drawing, drilling, casting, 3D printing and stack-and-draw methods have been used to produce microstructured fibers~\cite{Pysz2014,Atakaramians2009,ElHamzaoui2012,Dabas2010,Kumar2002SoftGlass,ElAmraoui2010Chalcogenide,Talataisong2018Printing,Cruz2018Fibers,Pysz2010Silicate,Mahdiraji2014Challenges,Gauvreau2007PBG,Hautakorpi2008ThreeHole}. For the proposed sensor, a modified stack-and-draw route can be considered. In this concept, thick-wall capillaries, thin-wall capillaries, solid silica rods and a rectangular-channel silica rod are arranged to form the preform. Four outward-facing open-channel elements are positioned at the periphery of the microstructured region to form the grooves after drawing.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{cffe960a-5a51-433a-815e-28505bdde7d6.png}
+\caption{Schematic arrangement of capillaries and rods for the proposed four-groove SPR-PCF preform. Thick-wall capillaries, thin-wall capillaries, solid silica rods and a rectangular-channel silica rod are arranged with four outward-facing groove-forming elements.}
+\label{Fig:preform_stack}
+\end{figure}
+Figure~\ref{Fig:preform_stack} shows the proposed preform arrangement. The four groove-forming elements are placed at orthogonal positions so that the final fiber can contain four exposed sensing channels. This figure strengthens the fabrication argument because it explains the origin of the open grooves in the final PCF structure.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.90\linewidth]{310af230-4890-49d4-9cbe-c1fe92d7a818.png}
+\caption{Conceptual fabrication sequence of the proposed Au/TiO$_2$/graphene-coated SPR-PCF biosensor. The preform is stacked, drawn into cane and final fiber, cut into sensing sections and sequentially coated with Au, TiO$_2$ and graphene.}
+\label{Fig:fabrication_route}
+\end{figure*}
+
+The complete fabrication route is shown in Fig.~\ref{Fig:fabrication_route}. First, the capillaries and rods are prepared and stacked. Then the preform is drawn into cane and finally into PCF dimensions using a heater-assisted drawing process. The sensing section is cut, and the exposed grooves are coated sequentially with gold, TiO$_2$ and graphene. The final longitudinal structure is surrounded by analyte during sensing. Since the present paper is numerical, the fabrication route should be interpreted as a conceptual route rather than an experimentally demonstrated process.
+
+
+
+\subsection{Fabrication-tolerance protocol}
+The present OFAT sweeps bracket several nominal values, but they were generated for design selection and should not be relabeled as tolerance statistics. A dedicated tolerance study should perturb the final geometry independently around its nominal values. At minimum, the Au and TiO$_2$ thicknesses should be varied by $\pm1$~nm and the principal fiber dimensions by $\pm2\%$. A Monte-Carlo ensemble of the final inverse-designed geometry should then report the mean, standard deviation and worst-case degradation of $D_{\min}$, wavelength sensitivity and FOM. This distinction is important because a geometry that maximizes nominal sensitivity can be less manufacturable than a slightly lower-sensitivity solution with substantially smaller performance variance.
+
+\section{Prospective interrogation and application pathway}
+\label{sec:application}
+
+The proposed sensor is suitable for refractive-index-based biological sensing in the RI range associated with several normal and pathological tissue analytes. The structure is particularly attractive for gastrointestinal tissue discrimination because the same PCF can detect esophageal, pancreatic, colon and liver pathological analytes. The resonant wavelength, peak confinement loss, amplitude sensitivity and polarization-dependent modal information may be used together for classification.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.76\linewidth]{Conceptual schematic.png}
+\caption{Conceptual interrogation system for the proposed SPR-PCF biosensor. Broadband light is launched into the sensor, the output spectrum is measured by an optical spectrum analyzer and the spectral response is processed by a computer to detect normal and pathological tissue analytes.}
+\label{Fig:BasicStructure}
+\end{figure*}
+
+Figure~\ref{Fig:BasicStructure} shows the conceptual interrogation setup. Broadband light is coupled into the PCF sensor. The analyte interacts with the Au/TiO$_2$/graphene-coated sensing grooves and changes the SPR condition. The output spectrum is collected by an optical spectrum analyzer (OSA). The resonance wavelength, loss peak and amplitude-sensitivity feature are then processed by a computer. In future experimental work, a supervised classifier may also be trained on measured spectral feature vectors for multi-class tissue discrimination; this downstream classification task is distinct from the geometry inverse-design optimizer formulated in Section~\ref{subsec:ml_inverse_optimization}.
+
+
+\section{Conclusions}
+\label{sec:conclusion}
+
+A four-groove Au/TiO$_2$/graphene SPR-PCF has been numerically investigated as a common refractometric platform for literature-derived normal/pathological GI tissue RI states. The deterministic FEM baseline uses accessible coated grooves to couple the guided PCF mode to SPP modes while retaining direct analyte contact with the outer sensing interface. Within the co-registered tissue confinement-loss dataset, the maximum wavelength sensitivity is 8695.65~nm/RIU for the esophageal comparison, and the reported global resonance calibration is $\lambda_{\mathrm{res}}=3455.32n_a-3035.55$ with $R^2=0.9956$. The archived amplitude-sensitivity sweep reaches approximately 953.79~RIU$^{-1}$ in magnitude for pancreatic adenocarcinoma, but this value remains auxiliary until the amplitude and tissue-loss spectra are regenerated on a common wavelength grid.
+
+The central methodological advance of the revised manuscript is a physics-grounded route from this deterministic baseline to a genuine multidimensional inverse-design study. Eight physical variables are separated from numerical-domain settings, a linewidth-normalized worst-case tissue-separability metric is introduced, active-learning surrogate optimization is coupled to mandatory full-FEM revalidation, and fabrication perturbations are incorporated through a robust objective. This formulation directly addresses the limitations of sequential OFAT tuning and aligns the planned optimization with contemporary photonic inverse-design practice.
+
+The evidence boundary is explicit. The present archive does not contain a completed multidimensional ML dataset, solver-verified ML optimum, unified phase-matching/tissue spectral sweep, formal mesh-refinement table or Monte-Carlo fabrication-tolerance statistics. Those results must be generated before the manuscript can support claims of completed ML optimization or fabrication robustness. Accordingly, the present results establish a deterministic optical baseline and a reproducible computational specification rather than claiming a completed ML-derived optimum. The specified solver-in-the-loop simulations can be incorporated directly into the same definitions and comparison framework once the multidimensional FEM data are generated and independently verified.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data and code availability}
+The manuscript is accompanied by a reproducibility package containing the structured source files, figure archive, supplementary information, digital-twin interface/dashboard, and CSV templates for FEM design sampling, mesh convergence, tissue-RI provenance, ML-candidate verification and fabrication-tolerance analysis. The digital-twin interface is intended as an online visualization and design-exploration demonstrator in its present form. The final FEM--ML database, trained surrogate models, model-card documentation and online digital-twin repository should be deposited in a public repository or archived with a DOI when the multidimensional simulations are completed.
+
+% Add a verified project-specific funding statement before submission, if applicable.
+
+\begin{thebibliography}{99}
+
+\bibitem{Sung2026Global} H. Sung et al., ``Global cancer statistics 2024: GLOBOCAN estimates of incidence and mortality worldwide for 34 cancers in 186 countries,'' \textit{CA: A Cancer Journal for Clinicians}, vol. 76, no. 4, article e70090, 2026, doi:10.3322/caac.70090.
+
+\bibitem{Bray2024Global} F. Bray, M. Laversanne, H. Sung, J. Ferlay, R. L. Siegel, I. Soerjomataram and A. Jemal, "Global cancer statistics 2022: GLOBOCAN estimates of incidence and mortality worldwide for 36 cancers in 185 countries," \textit{CA: A Cancer Journal for Clinicians}, vol. 74, no. 3, pp. 229--263, 2024.
+
+\bibitem{Fass2008Imaging} L. Fass, "Imaging and cancer: a review," \textit{Molecular Oncology}, vol. 2, no. 2, pp. 115--152, 2008.
+
+\bibitem{Kim2021Biomarkers} J. H. Kim and S. K. Hong, "Clinical utility of current biomarkers for prostate cancer detection," \textit{Investigative and Clinical Urology}, vol. 62, no. 1, pp. 1--13, 2021.
+
+\bibitem{Moe2020Biopsy} A. Moe and D. Hayne, "Transrectal ultrasound biopsy of the prostate: does it still have a role in prostate cancer diagnosis?" \textit{Translational Andrology and Urology}, vol. 9, no. 6, pp. 3018--3024, 2020.
+
+\bibitem{Gravestock2022Biopsy} B. P. Gravestock, S. Matthew and R. B. Heer, "Prostate cancer diagnosis: biopsy approaches," in \textit{Prostate Cancer}, Exon Publications, pp. 141--168, 2022.
+
+\bibitem{Porzycki2020Biomarkers} P. Porzycki and E. Ciszkowicz, "Modern biomarkers in prostate cancer diagnosis," \textit{Central European Journal of Urology}, vol. 73, no. 3, pp. 300--306, 2020.
+
+\bibitem{Zhang2021EIS} Z. Zhang et al., "Recent advances in electrical impedance sensing technology for single-cell analysis," \textit{Biosensors}, vol. 11, no. 11, article 470, 2021.
+
+\bibitem{DeLuna2018PC} F. DeLuna et al., "Label-free in vitro prostate cancer cell detection via photonic-crystal biosensor," in \textit{Biophysics, Biology and Biophotonics III: The Crossroads}, SPIE, vol. 10504, pp. 9--16, 2018.
+
+\bibitem{DeLuna2019RI} F. DeLuna, M. Cadena, B. Wang, L.-Z. Sun and J. Y. Ye, "Cellular refractive index comparison of various prostate cancer and noncancerous cell lines via photonic-crystal biosensor," in \textit{Imaging, Manipulation, and Analysis of Biomolecules, Cells, and Tissues XVII}, SPIE, vol. 10881, pp. 57--64, 2019.
+
+\bibitem{Knight2003} J. C. Knight, "Photonic crystal fibres," \textit{Nature}, vol. 424, pp. 847--851, 2003.
+
+\bibitem{Russell2003} P. St. J. Russell, "Photonic crystal fibers," \textit{Science}, vol. 299, no. 5605, pp. 358--362, 2003.
+
+\bibitem{Russell2006} P. St. J. Russell, "Photonic-crystal fibers," \textit{Journal of Lightwave Technology}, vol. 24, no. 12, pp. 4729--4749, 2006.
+
+\bibitem{Pissadakis2015} S. Pissadakis and S. Selleri, \textit{Optofluidics, Sensors and Actuators in Microstructured Optical Fibers}. Woodhead Publishing, 2015.
+
+\bibitem{Akowuah2012JQE} E. K. Akowuah, T. Gorman, H. Ademgil, S. Haxha, G. K. Robinson and J. V. Oliver, "Numerical analysis of a photonic crystal fiber for biosensing applications," \textit{IEEE Journal of Quantum Electronics}, vol. 48, no. 11, pp. 1403--1410, 2012.
+
+\bibitem{Singh2025Review} S. Singh, D. Kumar, A. Sahu, V. S. Chaudhary, G. Singh and S. Kumar, "Photonic crystal fiber-based sensors for various cancer detection in human body: a review," \textit{IEEE Sensors Journal}, vol. 25, no. 4, pp. 5956--5968, 2025, doi: 10.1109/JSEN.2024.3524325.
+
+\bibitem{Ramola2025Micromachines} A. Ramola, A. K. Shakya, V. Kumar and A. Bergman, "Recent advances in photonic crystal fiber-based SPR biosensors: design strategies, plasmonic materials, and applications," \textit{Micromachines}, vol. 16, no. 7, article 747, 2025, doi: 10.3390/mi16070747.
+
+\bibitem{Tene2025Sensors} T. Tene et al., "Advanced SPR-based biosensors for potential use in cancer detection: a theoretical approach," \textit{Sensors}, vol. 25, no. 9, article 2685, 2025.
+
+\bibitem{Khatun2026MeasurementReview} M. R. Khatun and M. S. Islam, ``Advances in PCF-SPR sensors: a comprehensive review of biosensing and environmental applications,'' \textit{Measurement}, vol. 258, article 119226, 2026, doi:10.1016/j.measurement.2025.119226.
+
+\bibitem{Alshaikhli2026Review} Z. S. Alshaikhli and F. H. Rajab, ``A comprehensive review of PCF-SPR sensors technology: Plasmonic material, optimization and recent ML modeling approaches,'' \textit{Journal of Science: Advanced Materials and Devices}, vol. 11, no. 3, article 101215, 2026, doi:10.1016/j.jsamd.2026.101215.
+
+\bibitem{Khan2021Covid} M. R. H. Khan, F. A. M. Ali and M. R. Islam, "THz sensing of CoViD-19 disinfecting products using photonic crystal fiber," \textit{Sensing and Bio-Sensing Research}, vol. 33, article 100447, 2021.
+
+\bibitem{Khan2023Cancer} M. R. H. Khan, A. A. Chowdhury, M. R. Islam, M. S. Hosen, M. H. Mim and M. M. Nishat, "Wave-shaped microstructure cancer detection sensor in terahertz band: design and analysis," \textit{Applied Sciences}, vol. 13, no. 9, article 5784, 2023.
+
+\bibitem{Khan2023Petrochemical} M. R. H. Khan, M. S. Hosen, A. A. Chowdhury, M. R. Islam, F. Faisal, M. M. Nishat and N. I. Bin Hamid, "Silicate-glass based photonic crystal fiber for rapid petro-chemical sensing: design and analysis," \textit{Sensing and Bio-Sensing Research}, vol. 45, article 100579, 2024.
+
+\bibitem{Islam2022AZO} M. R. Islam, A. N. M. Iftekher, F. Noor, M. R. H. Khan, M. T. Reza and M. M. Nishat, "AZO-coated plasmonic PCF nanosensor for blood constituent detection in near-infrared and visible spectrum," \textit{Applied Physics A}, 2022.
+
+\bibitem{Islam2022Cyanide} M. R. Islam et al., "Design of a hexagonal outlined porous cladding with vacant core photonic crystal fibre biosensor for cyanide detection at THz regime," \textit{IET Optoelectronics}, vol. 16, no. 4, pp. 160--173, 2022.
+
+\bibitem{Islam2023DualArrow} M. R. Islam, A. N. M. Iftekher, M. R. H. Khan et al., "Design of a dual arrow shaped and dual plasmonic material compatible SPR PCF sensor," \textit{Optical and Quantum Electronics}, vol. 55, article 1125, 2023.
+
+\bibitem{Khan2024GoldNanowire} A. A. Chowdhury, M. R. H. Khan, M. R. Islam, A. N. M. Iftekher, M. S. Hosen, M. H. Mim and M. M. Nishat, "Gold nanowire-infused square-clad SPR-PCF biosensor for detection of various cancer cells," \textit{Sensing and Bio-Sensing Research}, vol. 45, article 100670, 2024.
+
+\bibitem{Khan2025Prostate} M. S. Hosen, M. R. H. Khan, M. R. Islam, N. I. Bin Hamid, A. A. Chowdhury and coauthors, "Square-shaped SPR-PCF for prostate cancer detection: a new dimension in bio-sensing," \textit{Sensing and Bio-Sensing Research}, vol. 48, article 100802, 2025.
+
+\bibitem{Ritchie1957} R. H. Ritchie, "Plasma losses by fast electrons in thin films," \textit{Physical Review}, vol. 106, no. 5, pp. 874--881, 1957.
+
+\bibitem{Otto1968} A. Otto, "Excitation of nonradiative surface plasma waves in silver by the method of frustrated total reflection," \textit{Zeitschrift fuer Physik}, vol. 216, pp. 398--410, 1968.
+
+\bibitem{Kretschmann1968} E. Kretschmann and H. Raether, "Radiative decay of non-radiative surface plasmons excited by light," \textit{Zeitschrift fuer Naturforschung A}, vol. 23, no. 12, pp. 2135--2136, 1968.
+
+\bibitem{Homola2008} J. Homola, "Surface plasmon resonance sensors for detection of chemical and biological species," \textit{Chemical Reviews}, vol. 108, no. 2, pp. 462--493, 2008.
+
+\bibitem{Chen2012SPR} Y. Chen and H. Ming, "Review of surface plasmon resonance and localized surface plasmon resonance sensor," \textit{Photonic Sensors}, vol. 2, pp. 37--49, 2012.
+
+\bibitem{Piliarik2009Limits} M. Piliarik and J. Homola, "Surface plasmon resonance sensors: approaching their limits?" \textit{Optics Express}, vol. 17, no. 19, pp. 16505--16517, 2009.
+
+\bibitem{Yasli2021Cancer} A. Yasli, "Cancer detection with surface plasmon resonance-based photonic crystal fiber biosensor," \textit{Plasmonics}, vol. 16, pp. 1605--1612, 2021.
+
+\bibitem{Chaudhary2022TNB} V. S. Chaudhary, D. Kumar and S. Kumar, "Au--TiO$_2$ coated photonic crystal fiber based SPR refractometric sensor for detection of cancerous cells," \textit{IEEE Transactions on NanoBioscience}, 2022.
+
+\bibitem{Ehyaee2023EPJ} A. Ehyaee, M. Mohammadi, M. Seifouri and S. Olyaee, "Design and numerical investigation of a dual-core photonic crystal fiber refractive index sensor for cancer cells detection," \textit{European Physical Journal Plus}, vol. 138, article 129, 2023.
+
+\bibitem{Mittal2023Photonics} S. Mittal et al., "Spiral shaped photonic crystal fiber-based surface plasmon resonance biosensor for cancer cell detection," \textit{Photonics}, vol. 10, article 230, 2023.
+
+\bibitem{Ibrahimi2023Plasmonics} K. M. Ibrahimi, R. Kumar and W. Pakhira, "Enhanced design and performance analysis of a highly sensitive twin-core PCF SPR biosensor with gold plating for the early detection of cancer cells," \textit{Plasmonics}, vol. 18, no. 3, pp. 995--1006, 2023.
+
+\bibitem{Yang2023Plasmonics} X. Yang, S. Hou, C. Xie, G. Wu and Z. Yan, "High-performance photonic crystal fiber biosensor based on surface plasmon resonance for early cancer detection," \textit{Plasmonics}, 2023.
+
+\bibitem{Sardar2023Sensors} M. R. Sardar and M. Faisal, "Numerical analysis of highly sensitive twin-core, gold-coated, D-shaped photonic crystal fiber based on surface plasmon resonance sensor," \textit{Sensors}, vol. 23, no. 11, article 5029, 2023.
+
+\bibitem{Majeed2024OQE} M. F. Majeed and A. K. Ahmad, "Design and analysis of a dual-core PCF biosensor based on SPR for cancerous cells detection," \textit{Optical and Quantum Electronics}, vol. 56, no. 6, article 1030, 2024.
+
+\bibitem{Bhuyan2024Plasmonics} A. Bhuyan, A. Khamaru and A. Kumar, "Black phosphorus-based slotted D-shaped PCF SPR sensor for cancer detection," \textit{Plasmonics}, 2024.
+
+\bibitem{Sardar2024JSEN} M. R. Sardar and M. Faisal, "Dual-core dual-polished PCF-SPR sensor for cancer cell detection," \textit{IEEE Sensors Journal}, vol. 24, no. 7, pp. 9843--9854, 2024.
+
+\bibitem{Abdelghaffar2024JOSAB} M. Abdelghaffar et al., "Cancer cell detection by plasmonic dual V-shaped PCF biosensor," \textit{Journal of the Optical Society of America B}, vol. 41, no. 1, pp. 222--229, 2024.
+
+\bibitem{Pappu2024Plasmonics} M. H. Pappu, A. Rahman and M. A. Mollah, "An H-shaped exposed-core surface plasmon resonance sensor for detection of cancer cells," \textit{Plasmonics}, 2024.
+
+\bibitem{Arafin2024OME} S. Arafin, T. Fatema and M. S. Rahman, "Numerical analysis and detection of cancer cells using a dual-core gold-coated plasmonic biosensor," \textit{Optical Materials Express}, vol. 14, no. 6, pp. 1603--1619, 2024.
+
+\bibitem{Gupta2025Plasmonics} P. Gupta, A. Khamaru and A. Kumar, "Highly sensitive black phosphorus-layered SPR-PCF refractometric sensor," \textit{Plasmonics}, 2025.
+
+\bibitem{Karki2024Plasmonics} B. Karki et al., "Platinum diselenide and graphene-based refractive index sensor for cancer detection," \textit{Plasmonics}, vol. 19, no. 2, pp. 953--962, 2024.
+
+\bibitem{Karki2025Microchim} B. Karki et al., "Ultra-sensitive early detection of colorectal cancer using surface plasmon resonance sensor: theoretical analysis," \textit{Microchimica Acta}, vol. 192, article 126, 2025.
+
+\bibitem{Kumar2025Microchem} R. Kumar et al., "Ultrasensitive Fano resonance surface plasmon resonance sensor using lithium fluoride and hexagonal boron nitride," \textit{Microchemical Journal}, vol. 213, article 113869, 2025.
+
+\bibitem{Ashrafian2025SciRep} M. Ashrafian, S. Olyaee and M. Seifouri, "Highly sensitive cancer detection using an open D-channel PCF-based SPR biosensor," \textit{Scientific Reports}, vol. 15, article 10168, 2025.
+
+\bibitem{Khodatars2025SciRep} M. R. Khodatars Dashtmian, V. Fallahi, M. Seifouri and S. Olyaee, "Advanced SPR biosensor with optimized gold--TiO$_2$ D-shaped photonic crystal fiber for precise multi-cancer detection," \textit{Scientific Reports}, vol. 15, article 41003, 2025, doi: 10.1038/s41598-025-24697-y.
+
+\bibitem{Jamil2025SBSR} M. F. Jamil, M. B. Uddin and M. J. R. Tayef, "Gold and titanium dioxide enhanced PCF SPR biosensor for early breast cancer detection in near infrared spectrum," \textit{Sensing and Bio-Sensing Research}, vol. 49, article 100821, 2025.
+
+\bibitem{Alam2025SBSR} H. M. Khan, S. L. Mashahad, M. A. Islam and M. S. Alam, "Design of a polarization insensitive SPR biosensor for malaria and cancer detection," \textit{Sensing and Bio-Sensing Research}, vol. 49, article 100844, 2025.
+
+\bibitem{Johnson1972} P. B. Johnson and R. W. Christy, "Optical constants of the noble metals," \textit{Physical Review B}, vol. 6, no. 12, pp. 4370--4379, 1972.
+
+\bibitem{Palik1998Optical} E. D. Palik, \textit{Handbook of Optical Constants of Solids}. Academic Press, 1998.
+
+\bibitem{Lin2020TiO2} Z. Lin, S. Chen and C. Lin, "Sensitivity improvement of a surface plasmon resonance sensor based on two-dimensional materials hybrid structure in visible region: a theoretical study," \textit{Sensors}, vol. 20, no. 9, article 2445, 2020.
+
+\bibitem{Mu2023MXene} R. Mu et al., "Design and theoretical analysis of high-sensitive surface plasmon resonance sensor based on Au/Ti$_3$C$_2$T$_x$-MXene hybrid layered D-shaped photonic crystal fiber," \textit{IEEE Sensors Journal}, vol. 23, no. 16, pp. 18160--18167, 2023.
+
+\bibitem{Li2024MoS2} K. Li et al., "Experimental study on high-sensitivity MoS$_2$ thickness modulation refractive index sensor based on SPR-PCF," \textit{IEEE Sensors Journal}, vol. 24, no. 12, pp. 19007--19012, 2024.
+
+\bibitem{Dong2024MoO2} J. Dong et al., "Ultra-high sensitivity D-type photonic crystal fiber sensor deposited with MoO$_2$ nanofilm," \textit{Optical Materials}, vol. 152, article 115483, 2024.
+
+\bibitem{Dash2014Graphene} J. N. Dash and R. Jha, "Graphene-based birefringent photonic crystal fiber sensor using surface plasmon resonance," \textit{IEEE Photonics Technology Letters}, vol. 26, no. 11, pp. 1092--1095, 2014.
+
+\bibitem{Szunerits2013Graphene} S. Szunerits et al., "Recent advances in the development of graphene-based surface plasmon resonance interfaces," \textit{Analytical and Bioanalytical Chemistry}, vol. 405, pp. 1435--1443, 2013.
+
+\bibitem{Tan2015GraphenePCF} Y. Tan et al., "Graphene-deposited photonic crystal fibers for continuous refractive index sensing applications," \textit{Optics Express}, vol. 23, no. 24, pp. 31286--31294, 2015.
+
+\bibitem{Fu2018ACSPhotonics} P. H. Fu et al., "Optimization for gold nanostructure-based surface plasmon biosensors using a microgenetic algorithm," \textit{ACS Photonics}, vol. 5, no. 6, pp. 2320--2327, 2018.
+
+\bibitem{Li2017IEEEPhotonics} D. Li et al., "High sensitivity refractive index sensor based on multicoating photonic crystal fiber with surface plasmon resonance at near-infrared wavelength," \textit{IEEE Photonics Journal}, vol. 9, no. 2, pp. 1--8, 2017.
+
+\bibitem{Monazah2023LaserPhys} S. M. M. Monazah et al., "Design and numerical analysis of a highly sensitive nano-layer coated photonic crystal fiber biosensor," \textit{Laser Physics}, vol. 33, no. 8, article 086201, 2023.
+
+\bibitem{Molesky2018Inverse} S. Molesky, Z. Lin, A. Y. Piggott, W. Jin, J. Vuckovic and A. W. Rodriguez, ``Inverse design in nanophotonics,'' \textit{Nature Photonics}, vol. 12, pp. 659--670, 2018, doi:10.1038/s41566-018-0246-9.
+
+\bibitem{Geddis2026AIPlasmonics} A. Geddis, H. Williams, S. Bashir, J. Malenfant, C. Dubois, L. Hamlet and J.-F. Masson, ``Artificial intelligence and machine learning for plasmonic and surface-enhanced sensing,'' \textit{Chemical Society Reviews}, vol. 55, no. 6, pp. 3599--3644, 2026, doi:10.1039/D5CS01522G.
+
+\bibitem{Ramola2025AI} A. Ramola, A. K. Shakya and A. Bergman, ``Finite Element Method-Based Modeling of a Novel Square Photonic Crystal Fiber Surface Plasmon Resonance Sensor with a Au--TiO$_2$ Interface and the Relevance of Artificial Intelligence Techniques in Sensor Optimization,'' \textit{Photonics}, vol. 12, no. 6, article 565, 2025, doi:10.3390/photonics12060565.
+
+\bibitem{Akter2025MLPCF} M. M. Akter, M. R. Khatun, M. M. Hossain and M. W. Rahman, ``Advanced PCF-SPR biosensor design and performance optimization using machine learning techniques,'' \textit{Optik}, vol. 333, article 172391, 2025, doi:10.1016/j.ijleo.2025.172391.
+
+\bibitem{Khatun2025XAI} M. R. Khatun and M. S. Islam, ``Design optimization of high-sensitivity PCF-SPR biosensor using machine learning and explainable AI,'' \textit{PLOS ONE}, vol. 20, no. 9, article e0330944, 2025, doi:10.1371/journal.pone.0330944.
+
+\bibitem{Li2025MLMultiObjective} P. Li, H. Wang, Z. Tong, W. Zhang and J. Ma, ``Machine learning-assisted multi-objective optimization of photonic crystal fiber SPR sensors,'' \textit{Photonics and Nanostructures - Fundamentals and Applications}, vol. 67, article 101478, 2025, doi:10.1016/j.photonics.2025.101478.
+
+\bibitem{Sobur2025MLCancer} M. T. R. Sobur, M. M. Hasan, M. R. Khatun, M. M. Mia, W. Islam, M. S. Iqbal and M. M. Hossain, ``Machine learning-enhanced SPR-based optical biosensor for cancer cell detection,'' \textit{Optics \& Laser Technology}, vol. 192, Part D, article 113796, 2025, doi:10.1016/j.optlastec.2025.113796.
+
+\bibitem{Khatun2026MLXAI} M. R. Khatun and M. S. Islam, ``ML--XAI assisted design of PCF-SPR biosensors for refractive index-based analyte detection,'' \textit{Optik}, vol. 350, article 172761, 2026, doi:10.1016/j.ijleo.2026.172761.
+
+\bibitem{Hossain2026DeepRL} M. I. Hossain, T. Nafs, S. Yeaser, A. K. M. Rakib and R. H. Sagor, ``Deep reinforcement learning-optimized inverse design of nanophotonic sensor,'' \textit{Optics Express}, vol. 34, no. 17, pp. 31027--31058, 2026, doi:10.1364/OE.604282.
+
+\bibitem{Rejini2026SBSRML} K. Rejini, H. Nishat, P. Manikandan, P. Ashok and W. Ochen, ``Sensitivity-enhanced machine learning-assisted terahertz plasmonic biosensor using hybrid 2D materials for tuberculosis detection,'' \textit{Sensing and Bio-Sensing Research}, vol. 51, article 100964, 2026, doi:10.1016/j.sbsr.2026.100964.
+
+\bibitem{Vijayakumar2026SBSRML} K. Vijayakumar et al., ``High sensitivity terahertz metasurface biosensor integrating plasmonic coupling and machine learning for wearable diabetes monitoring,'' \textit{Sensing and Bio-Sensing Research}, vol. 51, article 100968, 2026, doi:10.1016/j.sbsr.2026.100968.
+
+\bibitem{Ayyanar2018JSEN} N. Ayyanar et al., "Photonic crystal fiber-based refractive index sensor for early detection of cancer," \textit{IEEE Sensors Journal}, vol. 18, no. 17, pp. 7093--7099, 2018.
+
+\bibitem{Ahmed2019JSEN} K. Ahmed et al., "Refractive index-based blood components sensing in terahertz spectrum," \textit{IEEE Sensors Journal}, vol. 19, no. 9, pp. 3368--3375, 2019.
+
+\bibitem{Pysz2014} D. Pysz et al., "Stack and draw fabrication of soft glass microstructured fiber optics," \textit{Bulletin of the Polish Academy of Sciences: Technical Sciences}, vol. 62, no. 4, pp. 667--682, 2014.
+
+\bibitem{Atakaramians2009} S. Atakaramians, S. Afshar, H. Ebendorff-Heidepriem, M. Nagel, B. M. Fischer, D. Abbott and T. M. Monro, "THz porous fibers: design, fabrication and experimental characterization," \textit{Optics Express}, vol. 17, no. 16, pp. 14053--14062, 2009.
+
+\bibitem{ElHamzaoui2012} H. El Hamzaoui et al., "Sol-gel derived ionic copper-doped microstructured optical fiber: a potential selective ultraviolet radiation dosimeter," \textit{Optics Express}, vol. 20, no. 28, pp. 29751--29760, 2012.
+
+\bibitem{Dabas2010} B. Dabas and R. Sinha, "Dispersion characteristic of hexagonal and square lattice chalcogenide As$_2$Se$_3$ glass photonic crystal fiber," \textit{Optics Communications}, vol. 283, no. 7, pp. 1331--1337, 2010.
+
+\bibitem{Kumar2002SoftGlass} V. R. K. Kumar et al., "Extruded soft glass photonic crystal fiber for ultrabroad supercontinuum generation," \textit{Optics Express}, vol. 10, no. 25, pp. 1520--1525, 2002.
+
+\bibitem{ElAmraoui2010Chalcogenide} M. El-Amraoui et al., "Microstructured chalcogenide optical fibers from As$_2$S$_3$ glass: towards new IR broadband sources," \textit{Optics Express}, vol. 18, no. 25, pp. 26655--26665, 2010.
+
+\bibitem{Talataisong2018Printing} W. Talataisong et al., "Novel method for manufacturing optical fiber: extrusion and drawing of microstructured polymer optical fibers from a 3D printer," \textit{Optics Express}, vol. 26, no. 24, pp. 32007--32013, 2018.
+
+\bibitem{Cruz2018Fibers} A. L. Cruz, C. Cordeiro and M. A. Franco, "3D printed hollow-core terahertz fibers," \textit{Fibers}, vol. 6, no. 3, article 43, 2018.
+
+\bibitem{Pysz2010Silicate} D. Pysz et al., "Development of silicate hollow core photonic crystal fiber," \textit{Photonics Letters of Poland}, vol. 2, no. 1, pp. 7--9, 2010.
+
+\bibitem{Mahdiraji2014Challenges} G. A. Mahdiraji et al., "Challenges and solutions in fabrication of silica-based photonic crystal fibers: an experimental study," \textit{Fiber and Integrated Optics}, vol. 33, no. 1--2, pp. 85--104, 2014.
+
+\bibitem{Gauvreau2007PBG} B. Gauvreau et al., "Photonic bandgap fiber-based surface plasmon resonance sensors," \textit{Optics Express}, vol. 15, no. 18, pp. 11413--11426, 2007.
+
+\bibitem{Hautakorpi2008ThreeHole} M. Hautakorpi, M. Mattinen and H. Ludvigsen, "Surface-plasmon-resonance sensor based on three-hole microstructured optical fiber," \textit{Optics Express}, vol. 16, no. 12, pp. 8427--8432, 2008.
+
+
+\bibitem{Singh2025ActiveLearning} S. Singh, R. Kumar, P. Singh and R. Hegde, ``Active learning for efficient nanophotonics inverse design in large and diverse design spaces,'' \textit{Optics Express}, vol. 33, no. 10, pp. 20308--20321, 2025, doi:10.1364/OE.559669.
+
+\bibitem{Xie2026SmallSample} L. Xie, Y. Li, L. Du, S. Wu, C. Yao and X. Yuan, ``Small-sample efficient inverse design of anti-reflection micro-nano optical structures: a Bayesian optimization-tuned extreme random trees framework,'' \textit{Optics Express}, vol. 34, no. 11, pp. 20597--20610, 2026, doi:10.1364/OE.597734.
+
+\bibitem{Mahlau2026BONNI} Y. Mahlau, Y. Augenstein, T. W. Hughes, M. Lindauer and B. Rosenhahn, ``Gradient-informed Bayesian and interior point optimization for efficient inverse design in nanophotonics,'' \textit{Optics Express}, vol. 34, no. 13, pp. 23160--23174, 2026, doi:10.1364/OE.600198.
+
+\bibitem{Wang2025RobustID} K. Wang, Z. Tang, Y. Wu, Y. Li, T. Wu, D. Liu, S. Zheng and M. Zhang, ``Robust inverse design of digital photonic devices for photonic integrated circuits,'' \textit{Optics Express}, vol. 33, no. 1, pp. 130--143, 2025, doi:10.1364/OE.544018.
+
+\end{thebibliography}
+
+\end{document}

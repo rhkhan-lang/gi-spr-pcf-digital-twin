@@ -1,0 +1,446 @@
+{
+  "created_utc": "2026-09-05T14:11:16.412210+00:00",
+  "file_count": 88,
+  "files": [
+    {
+      "path": ".gitignore",
+      "size_bytes": 67,
+      "sha256_16": "a062454562408f55"
+    },
+    {
+      "path": ".nojekyll",
+      "size_bytes": 0,
+      "sha256_16": "e3b0c44298fc1c14"
+    },
+    {
+      "path": ".replit",
+      "size_bytes": 79,
+      "sha256_16": "ec53e0f6871b5c46"
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 195,
+      "sha256_16": "696b7a460aee9e00"
+    },
+    {
+      "path": "LICENSE_NOTE.md",
+      "size_bytes": 166,
+      "sha256_16": "4691a5ea22775d48"
+    },
+    {
+      "path": "MANIFEST.json",
+      "size_bytes": 12051,
+      "sha256_16": "2981dc7c3369053d"
+    },
+    {
+      "path": "MANIFEST.txt",
+      "size_bytes": 5966,
+      "sha256_16": "8266755e06d02ff8"
+    },
+    {
+      "path": "Procfile",
+      "size_bytes": 47,
+      "sha256_16": "7dc52b2c5154c6a9"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1703,
+      "sha256_16": "15d9cc5e3c6994bf"
+    },
+    {
+      "path": "assets/DT_Active_Learning_Query_Efficiency.png",
+      "size_bytes": 309160,
+      "sha256_16": "71e8baaefe4900c9"
+    },
+    {
+      "path": "assets/DT_Inverse_Design_Convergence.png",
+      "size_bytes": 348813,
+      "sha256_16": "047288c1e33b475f"
+    },
+    {
+      "path": "assets/DT_Surrogate_All_Output_Parity.png",
+      "size_bytes": 473185,
+      "sha256_16": "3fcfbc3353955b6a"
+    },
+    {
+      "path": "assets/DT_Surrogate_Training_and_Test.png",
+      "size_bytes": 449003,
+      "sha256_16": "5aca57593575a598"
+    },
+    {
+      "path": "assets/Digital_Twin_Interface_Overview.png",
+      "size_bytes": 1377272,
+      "sha256_16": "0b210218d5bea909"
+    },
+    {
+      "path": "assets/Surrogate_Architecture_DT_Corrected.png",
+      "size_bytes": 1443505,
+      "sha256_16": "868f0bd88dfc6d34"
+    },
+    {
+      "path": "assets/core_mode_x.png",
+      "size_bytes": 54931,
+      "sha256_16": "e305bb653ecb0eb1"
+    },
+    {
+      "path": "assets/core_mode_y.png",
+      "size_bytes": 55120,
+      "sha256_16": "580a52c5f5fe4579"
+    },
+    {
+      "path": "assets/paper_sensor_geometry.png",
+      "size_bytes": 186418,
+      "sha256_16": "1bc5b3e628440dba"
+    },
+    {
+      "path": "assets/sensor_3d.png",
+      "size_bytes": 24467,
+      "sha256_16": "4fb9b54e66b428d6"
+    },
+    {
+      "path": "assets/sensor_3d_transparent.png",
+      "size_bytes": 238480,
+      "sha256_16": "d69e1e498e9bff4b"
+    },
+    {
+      "path": "assets/spp_mode_x.png",
+      "size_bytes": 47443,
+      "sha256_16": "e6d5a6ac2126bef8"
+    },
+    {
+      "path": "assets/spp_mode_y.png",
+      "size_bytes": 45988,
+      "sha256_16": "d1a0ef75bfaf0785"
+    },
+    {
+      "path": "backend/__init__.py",
+      "size_bytes": 47,
+      "sha256_16": "8bb7b30ebd66054f"
+    },
+    {
+      "path": "backend/app.py",
+      "size_bytes": 7412,
+      "sha256_16": "41923be463409785"
+    },
+    {
+      "path": "backend/build_demo_surrogate.py",
+      "size_bytes": 9330,
+      "sha256_16": "edc5a137313dbcba"
+    },
+    {
+      "path": "backend/comsol_connector.py",
+      "size_bytes": 2508,
+      "sha256_16": "2f7e1961430d7395"
+    },
+    {
+      "path": "backend/surrogate_runtime.py",
+      "size_bytes": 3359,
+      "sha256_16": "b071bb70f421238f"
+    },
+    {
+      "path": "data/README_data.md",
+      "size_bytes": 384,
+      "sha256_16": "e40dee3f4a5780de"
+    },
+    {
+      "path": "data/active_learning_comparison_demo.csv",
+      "size_bytes": 422,
+      "sha256_16": "7ca03a4bf7d7ddbe"
+    },
+    {
+      "path": "data/baseline_design.json",
+      "size_bytes": 848,
+      "sha256_16": "fae522119f9b269c"
+    },
+    {
+      "path": "data/fem_design_database_schema.csv",
+      "size_bytes": 358,
+      "sha256_16": "3ef279245cda230f"
+    },
+    {
+      "path": "data/fem_design_database_template.csv",
+      "size_bytes": 273,
+      "sha256_16": "f0dd4e13f0174c1c"
+    },
+    {
+      "path": "data/inverse_design_history_demo.csv",
+      "size_bytes": 464,
+      "sha256_16": "e9f16b55a9f7bd90"
+    },
+    {
+      "path": "data/reference_performance.csv",
+      "size_bytes": 515,
+      "sha256_16": "e2d471f62c3156dc"
+    },
+    {
+      "path": "data/surrogate_demo.pt",
+      "size_bytes": 12911,
+      "sha256_16": "8f9104e661f8e9af"
+    },
+    {
+      "path": "data/surrogate_demo_metrics.json",
+      "size_bytes": 896,
+      "sha256_16": "251e4279264d2f68"
+    },
+    {
+      "path": "data/surrogate_validation_demo_metrics.csv",
+      "size_bytes": 266,
+      "sha256_16": "7a8ab3f78675fa5a"
+    },
+    {
+      "path": "data/surrogate_weights_compact.json",
+      "size_bytes": 42545,
+      "sha256_16": "1c6a5a6b44fbb287"
+    },
+    {
+      "path": "data/tissue_cases.json",
+      "size_bytes": 783,
+      "sha256_16": "5490a5d9122f7028"
+    },
+    {
+      "path": "data/tissue_ri_provenance_template.csv",
+      "size_bytes": 151,
+      "sha256_16": "3a75d5b613a53f3c"
+    },
+    {
+      "path": "data/validation_log.csv",
+      "size_bytes": 229,
+      "sha256_16": "87f8fd5279c1ef54"
+    },
+    {
+      "path": "deploy/render/README.md",
+      "size_bytes": 117,
+      "sha256_16": "90a348825709697f"
+    },
+    {
+      "path": "deploy/replit/README.md",
+      "size_bytes": 124,
+      "sha256_16": "1c0b7e16b8f7db68"
+    },
+    {
+      "path": "deploy/static/README.md",
+      "size_bytes": 116,
+      "sha256_16": "7f9ff70199c1edbf"
+    },
+    {
+      "path": "docs/BACKEND_DEPLOYMENT_GUIDE.md",
+      "size_bytes": 629,
+      "sha256_16": "cb24d522d28777aa"
+    },
+    {
+      "path": "docs/DIGITAL_TWIN_ARCHITECTURE.md",
+      "size_bytes": 2214,
+      "sha256_16": "6e7172ee10f5ef74"
+    },
+    {
+      "path": "docs/GITHUB_UPLOAD_INSTRUCTIONS.md",
+      "size_bytes": 680,
+      "sha256_16": "22c270f117c2f72e"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_ROADMAP.md",
+      "size_bytes": 2716,
+      "sha256_16": "fc6f2fe0fd58105b"
+    },
+    {
+      "path": "docs/MODEL_CARD.md",
+      "size_bytes": 1380,
+      "sha256_16": "6c8f68729164cb25"
+    },
+    {
+      "path": "docs/PUBLICATION_DISCLOSURE_NOTE.md",
+      "size_bytes": 735,
+      "sha256_16": "4ec9ca8a1db2daeb"
+    },
+    {
+      "path": "docs/REPOSITORY_STRUCTURE.md",
+      "size_bytes": 1035,
+      "sha256_16": "dd9095cea330ec89"
+    },
+    {
+      "path": "docs/VALIDATED_SURROGATE_TODO.md",
+      "size_bytes": 645,
+      "sha256_16": "a3d316a7f0d88ed2"
+    },
+    {
+      "path": "frontend/README_frontend.md",
+      "size_bytes": 1093,
+      "sha256_16": "4ea68f5f87e58c48"
+    },
+    {
+      "path": "frontend/assets/DT_Active_Learning_Query_Efficiency.png",
+      "size_bytes": 309160,
+      "sha256_16": "71e8baaefe4900c9"
+    },
+    {
+      "path": "frontend/assets/DT_Inverse_Design_Convergence.png",
+      "size_bytes": 348813,
+      "sha256_16": "047288c1e33b475f"
+    },
+    {
+      "path": "frontend/assets/DT_Surrogate_All_Output_Parity.png",
+      "size_bytes": 473185,
+      "sha256_16": "3fcfbc3353955b6a"
+    },
+    {
+      "path": "frontend/assets/DT_Surrogate_Training_and_Test.png",
+      "size_bytes": 449003,
+      "sha256_16": "5aca57593575a598"
+    },
+    {
+      "path": "frontend/assets/Digital_Twin_Interface_Overview.png",
+      "size_bytes": 1377272,
+      "sha256_16": "0b210218d5bea909"
+    },
+    {
+      "path": "frontend/assets/Surrogate_Architecture_DT_Corrected.png",
+      "size_bytes": 1443505,
+      "sha256_16": "868f0bd88dfc6d34"
+    },
+    {
+      "path": "frontend/assets/core_mode_x.png",
+      "size_bytes": 54931,
+      "sha256_16": "e305bb653ecb0eb1"
+    },
+    {
+      "path": "frontend/assets/core_mode_y.png",
+      "size_bytes": 55120,
+      "sha256_16": "580a52c5f5fe4579"
+    },
+    {
+      "path": "frontend/assets/paper_sensor_geometry.png",
+      "size_bytes": 186418,
+      "sha256_16": "1bc5b3e628440dba"
+    },
+    {
+      "path": "frontend/assets/sensor_3d.png",
+      "size_bytes": 24467,
+      "sha256_16": "4fb9b54e66b428d6"
+    },
+    {
+      "path": "frontend/assets/sensor_3d_transparent.png",
+      "size_bytes": 238480,
+      "sha256_16": "d69e1e498e9bff4b"
+    },
+    {
+      "path": "frontend/assets/spp_mode_x.png",
+      "size_bytes": 47443,
+      "sha256_16": "e6d5a6ac2126bef8"
+    },
+    {
+      "path": "frontend/assets/spp_mode_y.png",
+      "size_bytes": 45988,
+      "sha256_16": "d1a0ef75bfaf0785"
+    },
+    {
+      "path": "frontend/index.html",
+      "size_bytes": 21475,
+      "sha256_16": "5deefefc4268c5d3"
+    },
+    {
+      "path": "index.html",
+      "size_bytes": 21475,
+      "sha256_16": "5deefefc4268c5d3"
+    },
+    {
+      "path": "manuscript/figures/DT_Active_Learning_Query_Efficiency.pdf",
+      "size_bytes": 19345,
+      "sha256_16": "a63f347dc3bf2fcc"
+    },
+    {
+      "path": "manuscript/figures/DT_Active_Learning_Query_Efficiency.png",
+      "size_bytes": 309160,
+      "sha256_16": "71e8baaefe4900c9"
+    },
+    {
+      "path": "manuscript/figures/DT_Inverse_Design_Convergence.pdf",
+      "size_bytes": 21919,
+      "sha256_16": "6311e6be3384bd80"
+    },
+    {
+      "path": "manuscript/figures/DT_Inverse_Design_Convergence.png",
+      "size_bytes": 348813,
+      "sha256_16": "047288c1e33b475f"
+    },
+    {
+      "path": "manuscript/figures/DT_Surrogate_All_Output_Parity.pdf",
+      "size_bytes": 23068,
+      "sha256_16": "83fac2c41321b392"
+    },
+    {
+      "path": "manuscript/figures/DT_Surrogate_All_Output_Parity.png",
+      "size_bytes": 473185,
+      "sha256_16": "3fcfbc3353955b6a"
+    },
+    {
+      "path": "manuscript/figures/DT_Surrogate_Training_and_Test.pdf",
+      "size_bytes": 27957,
+      "sha256_16": "f32c60b0fdd1ad7a"
+    },
+    {
+      "path": "manuscript/figures/DT_Surrogate_Training_and_Test.png",
+      "size_bytes": 449003,
+      "sha256_16": "5aca57593575a598"
+    },
+    {
+      "path": "manuscript/figures/Digital_Twin_Interface_Overview.png",
+      "size_bytes": 1377272,
+      "sha256_16": "0b210218d5bea909"
+    },
+    {
+      "path": "manuscript/figures/Q1_SPR_PCF_ML_DT_Final_Audited_contact_sheet.png",
+      "size_bytes": 989112,
+      "sha256_16": "8a70a44e7eee5fa4"
+    },
+    {
+      "path": "manuscript/figures/Surrogate_Architecture_DT_Corrected.pdf",
+      "size_bytes": 72331,
+      "sha256_16": "7277e9c678cce7ec"
+    },
+    {
+      "path": "manuscript/figures/Surrogate_Architecture_DT_Corrected.png",
+      "size_bytes": 1443505,
+      "sha256_16": "868f0bd88dfc6d34"
+    },
+    {
+      "path": "manuscript/pdf/Q1_SPR_PCF_ML_DT_Final_Audited_2026.pdf",
+      "size_bytes": 7980100,
+      "sha256_16": "1ac572753f1ad6c4"
+    },
+    {
+      "path": "manuscript/tex/Q1_SPR_PCF_ML_DT_Final_Audited_2026.tex",
+      "size_bytes": 96859,
+      "sha256_16": "821a257c1e1a5b15"
+    },
+    {
+      "path": "manuscript/tex/Q1_SPR_PCF_ML_DT_Q1_Audit_Report.md",
+      "size_bytes": 5286,
+      "sha256_16": "ebb274391e585299"
+    },
+    {
+      "path": "notebooks/README_notebooks.md",
+      "size_bytes": 207,
+      "sha256_16": "34bf6a5bc94bf3b5"
+    },
+    {
+      "path": "render.yaml",
+      "size_bytes": 251,
+      "sha256_16": "3f2aa408bf29cb65"
+    },
+    {
+      "path": "requirements-comsol.txt",
+      "size_bytes": 29,
+      "sha256_16": "68966a70a1b852a5"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 38,
+      "sha256_16": "72953f31cda707df"
+    },
+    {
+      "path": "tests/README_tests.md",
+      "size_bytes": 164,
+      "sha256_16": "84df35de8ad7e014"
+    }
+  ]
+}

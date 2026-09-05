@@ -1,0 +1,9 @@
+training_set_size,uncertainty_guided_active_learning_r2,random_sampling_r2,status
+40,0.870,0.838,demo/synthetic placeholder
+55,0.916,0.880,demo/synthetic placeholder
+70,0.944,0.910,demo/synthetic placeholder
+85,0.965,0.938,demo/synthetic placeholder
+100,0.975,0.958,demo/synthetic placeholder
+115,0.980,0.968,demo/synthetic placeholder
+130,0.983,0.974,demo/synthetic placeholder
+145,0.986,0.978,demo/synthetic placeholder

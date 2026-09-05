@@ -1,0 +1,2 @@
+gold_thickness_nm,tio2_thickness_nm,graphene_layers,groove_radius_um,ah1_um,ah2_um,core_width_um,core_height_um,analyte_ri,resonance_wavelength_nm,CLmax,FWHM_nm,wavelength_sensitivity_nm_per_RIU,FOM_RIU_inv,separability_D,source,notes
+19,12,1,0.390,0.376,0.146,0.260,0.400,1.3950,,,,,,,COMSOL/FEM required,Fill this template with validated simulator outputs

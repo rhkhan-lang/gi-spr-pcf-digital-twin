@@ -1,0 +1,5 @@
+metric,r2,mae,rmse,status
+resonance_wavelength_nm,0.987,2.9,3.8,demo/synthetic placeholder
+FWHM_nm,0.978,1.6,2.2,demo/synthetic placeholder
+min_transmission,0.971,0.012,0.018,demo/synthetic placeholder
+sensitivity_nm_per_riu,0.985,110,155,demo/synthetic placeholder

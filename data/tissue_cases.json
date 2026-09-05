@@ -1,0 +1,9 @@
+[
+  {"case":"Esophageal tumor", "wavelength_sensitivity_nm_per_riu":8695.65, "archived_as_riu_inv":-375.93},
+  {"case":"Pancreatic adenocarcinoma", "wavelength_sensitivity_nm_per_riu":4583.33, "archived_as_riu_inv":-953.79},
+  {"case":"IPMN", "wavelength_sensitivity_nm_per_riu":4090.91, "archived_as_riu_inv":-680.56},
+  {"case":"Tubulovillous adenoma", "wavelength_sensitivity_nm_per_riu":2105.26, "archived_as_riu_inv":-240.74},
+  {"case":"Colon adenocarcinoma", "wavelength_sensitivity_nm_per_riu":2000.00, "archived_as_riu_inv":-175.34},
+  {"case":"Metastatic liver tissue (MET)", "wavelength_sensitivity_nm_per_riu":2162.16, "archived_as_riu_inv":235.73},
+  {"case":"Hepatocellular carcinoma (HCC)", "wavelength_sensitivity_nm_per_riu":2013.42, "archived_as_riu_inv":221.12}
+]

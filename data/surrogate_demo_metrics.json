@@ -1,0 +1,33 @@
+{
+  "n_synthetic_train": 3200,
+  "n_synthetic_test": 800,
+  "model": "9-32-32-16-5 MLP, SiLU",
+  "important_warning": "Metrics below assess fit to the synthetic demo response only; they are not FEM validation metrics.",
+  "per_output": {
+    "resonance_wavelength_nm": {
+      "rmse": 5.817501280336861,
+      "mae": 4.012704586170838,
+      "r2": 0.9972360697042018
+    },
+    "fwhm_nm": {
+      "rmse": 0.5493674781037652,
+      "mae": 0.41092432932393774,
+      "r2": 0.991488065210454
+    },
+    "peak_loss_db_cm": {
+      "rmse": 5.229902610676564,
+      "mae": 3.870117045591724,
+      "r2": 0.9958421547637111
+    },
+    "local_ws_nm_per_riu": {
+      "rmse": 49.86434210683529,
+      "mae": 37.45221064159922,
+      "r2": 0.9934758574270514
+    },
+    "amplitude_proxy_riu_inv": {
+      "rmse": 9.159836073576091,
+      "mae": 7.067998796177453,
+      "r2": 0.9914571595344626
+    }
+  }
+}

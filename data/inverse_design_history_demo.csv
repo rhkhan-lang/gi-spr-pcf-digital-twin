@@ -1,0 +1,10 @@
+step,predicted_resonance_nm,predicted_sensitivity_nm_per_riu,loss,status
+0,1710,5400,2850,demo/synthetic placeholder
+25,1775,3820,280,demo/synthetic placeholder
+50,1794,3700,70,demo/synthetic placeholder
+75,1789,4050,35,demo/synthetic placeholder
+100,1785,4320,20,demo/synthetic placeholder
+150,1781,4480,12,demo/synthetic placeholder
+200,1780,4490,8,demo/synthetic placeholder
+250,1780,4495,5,demo/synthetic placeholder
+300,1780,4500,3,demo/synthetic placeholder

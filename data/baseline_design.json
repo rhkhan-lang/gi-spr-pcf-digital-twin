@@ -1,0 +1,33 @@
+{
+  "sensor": "Au/TiO2/graphene-coated four-groove SPR-PCF biosensor",
+  "status": "digital-twin demonstration baseline; replace with FEM-trained validated model before reporting predictive accuracy",
+  "baseline_design_variables": {
+    "gold_thickness_nm": 19.0,
+    "tio2_thickness_nm": 12.0,
+    "graphene_layers": 1,
+    "groove_radius_um": 0.390,
+    "ah1_um": 0.376,
+    "ah2_um": 0.146,
+    "core_width_um": 0.260,
+    "core_height_um": 0.400
+  },
+  "inverse_design_input_vector": [
+    "gold_thickness_nm",
+    "tio2_thickness_nm",
+    "graphene_layers",
+    "groove_radius_um",
+    "ah1_um",
+    "ah2_um",
+    "core_width_um",
+    "core_height_um",
+    "analyte_ri"
+  ],
+  "output_vector": [
+    "resonance_wavelength_nm",
+    "CLmax",
+    "FWHM_nm",
+    "wavelength_sensitivity_nm_per_RIU",
+    "FOM_RIU_inv",
+    "separability_D"
+  ]
+}
